@@ -8,16 +8,27 @@
                 <li><router-link to="/">RECEITAS</router-link></li>
                 <li><router-link to="/minhas-receitas">MINHAS RECEITAS</router-link></li>
             </ul>
-            <div>
+            <div v-if="usuarioLogado == false">
                 <router-link to="/login"><button class="btn">Login</button></router-link>
+            </div>
+            <div v-if="usuarioLogado == true">
+                <router-link to="/login"><button @click="deslogarUsuario" class="btn deslogar">Deslogar</button></router-link>
             </div>
         </nav>
     </section>
 </template>
 
 <script>
+import {mapState, mapActions} from "vuex"
+
 export default {
-    name: "Header"
+    name: "Header",
+    computed: {
+        ...mapState(["usuarioLogado"])
+    },
+    methods: {
+        ...mapActions(["deslogarUsuario"]),
+    }
 }
 </script>
 
@@ -75,5 +86,8 @@ export default {
     box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
 }
 
+.deslogar {
+    background-color: red;
+}
 
 </style>
