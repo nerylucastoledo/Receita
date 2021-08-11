@@ -1,33 +1,25 @@
 <template>
-    <section class="minhas-receitas">
+    <section id="items">
         <h1 class="titulo">Suas Receitas</h1>
-        <div class="sobre-receita">
-            <div>
-                <img :src="receita[0].imagem" alt="">
-                <span>Nome: {{receita[0].nome_receita}}</span>
-                <span>Serve: {{receita[0].serve}} </span>
-                <p>Descrição: {{receita[0].descricao}} </p>
+        <div v-if="receita.length > 0" class="mostrar-items">
+            <div v-for="(item, index) in receita" :key="item+index">
+                
+                <router-link :to="{name: 'produto', params: {id: item.id_receita}}">
+                    <img :src="item.imagem" alt="">
+                    <h2>{{item.nome_receita}}</h2>
+                    <p>Serve: {{item.serve}} </p>
+                    <p>Descrição: {{item.descricao}} </p>
+                </router-link>
+
             </div>
-            <div>
-                <img :src="receita[0].imagem" alt="">
-                <span>Nome: {{receita[0].nome_receita}}</span>
-                <span>Serve: {{receita[0].serve}} </span>
-                <p>Descrição: {{receita[0].descricao}} </p>
-            </div>
-            <div>
-                <img :src="receita[0].imagem" alt="">
-                <span>Nome: {{receita[0].nome_receita}}</span>
-                <span>Serve: {{receita[0].serve}} </span>
-                <p>Descrição: {{receita[0].descricao}} </p>
-            </div>
-            <div>
-                <img :src="receita[0].imagem" alt="">
-                <span>Nome: {{receita[0].nome_receita}}</span>
-                <span>Serve: {{receita[0].serve}} </span>
-                <p>Descrição: {{receita[0].descricao}} </p>
-            </div>
+
         </div>
-        <button class="btn cadastrar">Cadastrar receita</button>
+
+        <div v-if="!usuarioLogado">
+            <p>Faça o login para cadastrar uma receita!</p>
+        </div>
+
+        <button v-if="usuarioLogado" class="btn cadastrar">Cadastrar receita</button>
     </section>
 </template>
 
@@ -42,7 +34,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(["dadosUsuario"])
+        ...mapState(["dadosUsuario", "usuarioLogado"])
     },
     methods: {
         getMinhasReceitas(email) {
@@ -61,37 +53,15 @@ export default {
 
 <style scoped>
 
-.minhas-receitas {
-    max-width: 1000px;
-    margin: 0 auto;
+#items .titulo {
+    margin-top: 60px;
 }
 
-.minhas-receitas .titulo {
-    margin: 60px 0px;
-}
-
-.sobre-receita {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 30px;
-    margin-bottom: 40px;
-}
-
-.sobre-receita img {
-    max-width: 100%;
-}
-
-.sobre-receita span, p{
-    display: block;
-    margin-top: 20px;
-}
-
-.sobre-receita div {
-    background-color: #fff;
+#items p {
     text-align: center;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
-    border-radius: 4px;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
+
 
 </style>

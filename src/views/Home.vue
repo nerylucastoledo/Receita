@@ -3,9 +3,11 @@
     <div class="home">
       <h1 class="titulo">VEJA AS MELHORES RECEITAS AQUI</h1>
     </div>
+
     <div>
       <ListItems/>
     </div>
+    
   </section>
 </template>
 
@@ -26,6 +28,10 @@ export default {
   background-size: cover;
   height: 300px;
   filter: brightness(70%);
+}
+
+#footer {
+  position: relative;
 }
 
 .cadastrar {

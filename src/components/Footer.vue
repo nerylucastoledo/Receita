@@ -16,6 +16,8 @@ export default {
     background-color: #20252B;
     text-align: center;
     padding: 20px;
+    position: relative;
+    top: 65px;
 }
 
 #footer p {

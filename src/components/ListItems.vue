@@ -1,45 +1,48 @@
 <template>
     <section id="items">
-        <div id="mostrar-items">
-            <div>
-                <img src="../assets/comida.png" alt="Comida">
+        <div class="mostrar-items">
+
+            <div v-for="(receita, index) in receitas" :key="receita+index">
                 <div>
-                    <h2>Nome_da_receita</h2>
-                    <p>Descrição da receita irá ficar aqui</p>
+                    <router-link :to="{name: 'produto', params: {id: receita.id_receita}}">
+
+                        <img :src="receita.imagem" alt="Comida">
+
+                        <div>
+                            <h2>{{receita.nome_receita}}</h2>
+                            <p>{{receita.descricao}}</p>
+                        </div>
+
+                        <button class="btn">Confira</button>
+
+                    </router-link>
                 </div>
             </div>
-            <div>
-                <img src="../assets/comida.png" alt="Comida">
-                <h2>Nome_da_receita</h2>
-                <p>Descrição da receita irá ficar aqui</p>
-            </div>
-            <div>
-                <img src="../assets/comida.png" alt="Comida">
-                <h2>Nome_da_receita</h2>
-                <p>Descrição da receita irá ficar aqui</p>
-            </div>
-            <div>
-                <img src="../assets/comida.png" alt="Comida">
-                <h2>Nome_da_receita</h2>
-                <p>Descrição da receita irá ficar aqui</p>
-            </div>
-            <div>
-                <img src="../assets/comida.png" alt="Comida">
-                <h2>Nome_da_receita</h2>
-                <p>Descrição da receita irá ficar aqui</p>
-            </div>
-            <div>
-                <img src="../assets/comida.png" alt="Comida">
-                <h2>Nome_da_receita</h2>
-                <p>Descrição da receita irá ficar aqui</p>
-            </div>
+
         </div>
     </section>
 </template>
 
 <script>
 export default {
-    name: "ListItems"
+    name: "ListItems",
+    data() {
+        return {
+            receitas: null
+        }
+    },
+    methods: {
+        getAllProdutos() {
+            fetch("http://127.0.0.1:8000/receita/")
+            .then(response => response.json())
+            .then(result => {
+                this.receitas = result
+            })
+        }
+    },
+    created() {
+        this.getAllProdutos()
+    }
 }
 </script>
 
@@ -48,35 +51,37 @@ export default {
 #items {
     max-width: 1000px;
     margin: 0 auto 60px auto;
-    padding: 0px 10px;
+    padding: 0px 15px;
 }
 
-#mostrar-items {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 30px;
+.mostrar-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-top: 60px;
-}
-
-#mostrar-items div {
-    background-color: #F3EDED;
     text-align: center;
-    padding-bottom: 20px;
 }
 
-#mostrar-items div p{
+.mostrar-items div {
+    background-color: #F3EDED;
+    padding: 0px 0px 15px;
+}
+
+.mostrar-items div p{
     color: #878484;
     margin-top: 20px;
 }
 
-#mostrar-items div h2{
+.mostrar-items div h2{
     color: #000;
     font-weight: bold;
     margin-top: 10px;
 }
 
-#mostrar-items img {
-    max-width: 100%;
+.mostrar-items img {
+    width: 300px;
+    height: 200px;
+    padding: 15px;
 }
 
 </style>

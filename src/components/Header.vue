@@ -2,7 +2,7 @@
     <section id="header">
         <nav id="menu">
             <div>
-                <img id="img" src="../assets/logo.png" alt="Logo da empresa">
+                <router-link to="/"><img id="img" src="../assets/logo.png" alt="Logo da empresa"></router-link>
             </div>
             <ul>
                 <li><router-link to="/">RECEITAS</router-link></li>
@@ -44,6 +44,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 15px;
 }
 
 #menu ul li {
