@@ -16,6 +16,13 @@ export default new Vuex.Store({
   },
   mutations: {
     LOGAREDESLOGAR(state, payload) {
+      if(payload == false) {
+        state.dadosUsuario.nome = ""
+        state.dadosUsuario.sobrenome = ""
+        state.dadosUsuario.email = ""
+        state.dadosUsuario.estado = ""
+        state.dadosUsuario.cidade = ""
+      }
       state.usuarioLogado = payload
     },
     INSERIROSDADOS(state, payload) {
@@ -24,7 +31,6 @@ export default new Vuex.Store({
       state.dadosUsuario.email = payload.email
       state.dadosUsuario.estado = payload.estado
       state.dadosUsuario.cidade = payload.cidade
-      console.log(payload.nome, payload.sobrenome, payload.email, payload.estado, payload.cidade)
     }
   },
   actions: {
