@@ -31,6 +31,7 @@ export default new Vuex.Store({
       state.dadosUsuario.email = payload.email
       state.dadosUsuario.estado = payload.estado
       state.dadosUsuario.cidade = payload.cidade
+      console.log()
     }
   },
   actions: {

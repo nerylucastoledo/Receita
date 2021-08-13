@@ -20,11 +20,11 @@ export default {
 
 <style>
 
-label {
+label, textarea {
   margin-bottom: 5px;
 }
 
-input {
+input, textarea {
   border-radius: 4px;
   border: 1px solid #fff;
   padding: 15px;
@@ -36,7 +36,7 @@ input {
   width: 100%;
 }
 
-input:hover, input:focus {
+input:hover, input:focus, textarea:focus, textarea:hover {
   outline: none;
   box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
   border-color: #6F9A37;

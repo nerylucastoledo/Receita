@@ -44,6 +44,8 @@ export default {
                     this.logado = "correto"
                     this.logar()
                     this.pegarDados(this.data.email)
+                    localStorage.setItem("email", this.data.email)
+                    localStorage.setItem("senha", this.data.senha)
                     this.$router.push({name: "Home"})
                 } else {
                     this.logado = "incorreto"

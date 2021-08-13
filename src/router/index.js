@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import MinhasReceitas from '../views/MinhasReceitas.vue'
 import Produto from "../views/Produto.vue"
 import Login from '../views/Login.vue'
+import CadastraReceita from "../views/CadastraReceita.vue"
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     name: 'produto',
     component: Produto,
     props: true
+  },
+  {
+    path: '/cadastrar-receita',
+    name: 'cadastrar-receita',
+    component: CadastraReceita,
   },
 ]
 

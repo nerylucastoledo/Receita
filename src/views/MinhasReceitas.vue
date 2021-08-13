@@ -4,12 +4,14 @@
         <div v-if="receita.length > 0" class="mostrar-items">
             <div v-for="(item, index) in receita" :key="item+index">
                 
-                <router-link :to="{name: 'produto', params: {id: item.id_receita}}">
+                <div class="items-receita">
+                    <router-link :to="{name: 'produto', params: {id: item.id_receita}}">
                     <img :src="item.imagem" alt="">
                     <h2>{{item.nome_receita}}</h2>
                     <p>Serve: {{item.serve}} </p>
                     <p>Descrição: {{item.descricao}} </p>
-                </router-link>
+                    </router-link>
+                </div>
 
             </div>
 
@@ -19,7 +21,7 @@
             <p>Faça o login para cadastrar uma receita!</p>
         </div>
 
-        <button v-if="usuarioLogado" class="btn cadastrar">Cadastrar receita</button>
+        <router-link to="/cadastrar-receita"><button v-if="usuarioLogado" class="btn cadastrar">Cadastrar receita</button></router-link>
     </section>
 </template>
 
@@ -30,7 +32,7 @@ export default {
     name: "MinhasReceitas",
     data() {
         return {
-            receita: null
+            receita: ""
         }
     },
     computed: {

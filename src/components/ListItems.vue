@@ -3,7 +3,7 @@
         <div class="mostrar-items">
 
             <div v-for="(receita, index) in receitas" :key="receita+index">
-                <div>
+                <div class="items-receita">
                     <router-link :to="{name: 'produto', params: {id: receita.id_receita}}">
 
                         <img :src="receita.imagem" alt="Comida">
@@ -57,13 +57,12 @@ export default {
 .mostrar-items {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 60px;
     text-align: center;
 }
 
 .mostrar-items div {
-    background-color: #F3EDED;
     padding: 0px 0px 15px;
 }
 
@@ -82,6 +81,11 @@ export default {
     width: 300px;
     height: 200px;
     padding: 15px;
+}
+
+.items-receita {
+    background-color: #F3EDED;
+    margin: 0px 10px 20px 10px;
 }
 
 </style>
