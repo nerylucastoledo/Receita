@@ -51,17 +51,11 @@ export default {
                 },
                 body: JSON.stringify(this.usuario)
             })
-            alert("Usuário cadastrado!")
-            this.$router.push({name: "Login"})
         }
     }
 }
 </script>
 
 <style>
-
-.usuario {
-    margin-top: 40px;
-}
     
 </style>

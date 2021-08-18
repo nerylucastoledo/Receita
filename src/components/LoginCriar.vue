@@ -2,8 +2,7 @@
     <section>
         <h1 class="titulo">Crie sua conta</h1>
         <button v-if="!mostrar" @click="mostrar = true" class="btn cadastrar">Criar conta</button>
-        <UsuarioForm v-else>
-        </UsuarioForm>
+        <UsuarioForm v-else></UsuarioForm>
     </section>
 </template>
 

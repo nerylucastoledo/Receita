@@ -44,6 +44,7 @@ input:hover, input:focus, textarea:focus, textarea:hover {
 
 * {
   box-sizing: border-box;
+  font-family: cursive;
 }
 
 body,ul, li, h1, h2, p {
@@ -60,7 +61,8 @@ a {
 }
 
 body {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: cursive;
+  background: url('./assets/background.jpg');
 }
 
 </style>

@@ -16,8 +16,8 @@
             <label for="modo_preparo">Modo de Preparo</label>
             <input name="modo_preparo" id="modo_preparo" v-model="produto.modo_preparo">
 
-            <label for="fotos">Fotos</label>
-            <input type="file" name="fotos" id="fotos" multiple ref="fotos" />
+            <label for="imagem">Imagem</label>
+            <input type="file" name="imagem" id="imagem" multiple ref="imagem" />
 
             <input class="btn cadastrar" type="submit" value="Adicionar Receita" @click.prevent="cadastrarReceita" />
         </form>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     data() {
@@ -35,14 +36,14 @@ export default {
                 ingredientes: "",
                 descricao: "",
                 modo_preparo: "",
-                fotos: null
+                imagem: null
             },
         }
     },
     methods: {
         cadastrarReceita() {
             const form = new FormData();
-            //const file = this.$refs.fotos.files
+            const file = this.$refs.imagem.files[0]
 
             form.append("nome_receita", this.produto.nome_receita)
             form.append("serve", this.produto.serve)
@@ -51,37 +52,21 @@ export default {
             form.append("modo_preparo", this.produto.modo_preparo)
             form.append("nome_criador", this.$store.state.dadosUsuario.nome)
             form.append("email_criador", this.$store.state.dadosUsuario.email)
-            form.append("imagem", null)
+            form.append("imagem", file)
 
-            console.log(...form)
-
-            fetch("http://127.0.0.1:8000/receita/", {
-                method: "POST",
-                body: form
+            axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:8000/receita/',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: form
             })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(erro => console.log(erro))
         }
     }
 }
 </script>
 
 <style scoped>
-
-.cadastrar-receita {
-    max-width: 1000px;
-    margin: 60px auto 0px;
-}
-
-.cadastrar-receita form {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.cadastrar {
-    margin-bottom: 0px;
-}
 
 </style>

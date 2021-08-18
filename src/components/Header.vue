@@ -5,55 +5,50 @@
                 <router-link to="/"><img id="img" src="../assets/logo.png" alt="Logo da empresa"></router-link>
             </div>
             <ul>
-                <li><router-link to="/">RECEITAS</router-link></li>
-                <li><router-link to="/minhas-receitas">MINHAS RECEITAS</router-link></li>
+                <li><router-link to="/">Receitas</router-link></li>
+                <li><router-link to="/minhas-receitas">Minhas Receitas</router-link></li>
             </ul>
-            <div v-if="usuarioLogado == false">
+            <div class="entrar-header">
+                <img src="../assets/icon-pessoa.png" alt="">
                 <router-link to="/login"><button class="btn">Login</button></router-link>
-            </div>
-            <div v-if="usuarioLogado == true">
-                <router-link to="/login"><button @click="deslogarUsuario" class="btn deslogar">Deslogar</button></router-link>
             </div>
         </nav>
     </section>
 </template>
 
 <script>
-import {mapState, mapActions} from "vuex"
 
 export default {
     name: "Header",
-    computed: {
-        ...mapState(["usuarioLogado"])
-    },
-    methods: {
-        ...mapActions(["deslogarUsuario"]),
-    }
 }
 </script>
 
 <style>
 
 #header {
-    background-color: #20252B;
+    background-color: #F3F5F6;
 }
 
 #menu {
-    max-width: 1000px;
+    padding: 10px 0px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+    max-width: 1200px;
     align-items: center;
-    padding: 15px;
+    display: flex;
+    justify-content: space-around;
 }
 
-#menu ul li {
-    display: inline-block;
+#menu img {
+    max-width: 250px;
+}
+
+#menu ul {
+    display: flex;
+    align-items: center;
+}
+
+#menu ul li:nth-child(1) {
     margin-right: 20px;
-}
-
-#menu ul li a {
-    color: #fff;
 }
 
 #menu ul li:first-child::after {
@@ -61,34 +56,32 @@ export default {
     display: inline-block;
     width: 1px;
     height: 20px;
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     margin-left: 10px;
+}
+
+#menu ul li a {
+    color: #759F41;
+    font-size: 1rem;
 }
 
 #menu ul li a:hover {
     color: #FC834B;
 }
 
-#img {
-    width: 150px;
+.entrar-header {
+    display: flex;
+    align-items: center;
 }
 
-.btn {
-    background-color: #6F9A37;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 1rem;
-    color: #fff;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
+.entrar-header img {
+    width: 30px;
+    margin-right: 10px;
 }
 
-.deslogar {
-    background-color: red;
+.entrar-header button:hover {
+    transform: scale(1.2);
 }
 
 </style>
