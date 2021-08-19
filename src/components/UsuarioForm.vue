@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         cadastrarUsuario() {
-            fetch("http://127.0.0.1:8000/usuario/", {
+            fetch("http://127.0.0.1:8000/usuario/?email=", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,5 +57,6 @@ export default {
 </script>
 
 <style>
+
     
 </style>

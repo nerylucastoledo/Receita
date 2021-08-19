@@ -2,94 +2,104 @@
     <section id="pagina-inicial">
         <h1 class="titulo">Navegue pelas categorias</h1>
         <div class="categoria">
-            <router-link to="/">
-                <div class="categoria-items">
-                    <img src="../assets/paes.png" alt="">
-                    <p>Pães</p>
-                </div>
-            </router-link>
+            <div class="categoria-items" @click="ola">
+                <img src="../assets/paes.png" alt="">
+                <p>Pães</p>
+            </div>
 
-            <router-link to="/">
-                <div class="categoria-items">
-                    <img src="../assets/sobremesa.png" alt="">
-                    <p>Sobremesa</p>
-                </div>
-            </router-link>
-
-            <router-link to="/">
-                <div class="categoria-items">
-                    <img src="../assets/salgados.png" alt="">
-                    <p>Salgados</p>
-                </div>
-            </router-link>
-
-            <router-link to="/">
+            <div class="categoria-items">
+                <img src="../assets/sobremesa.png" alt="">
+                <p>Sobremesa</p>
+            </div>
+        
+            <div class="categoria-items">
+                <img src="../assets/salgados.png" alt="">
+                <p>Salgados</p>
+            </div>
+        
             <div class="categoria-items">
                 <img src="../assets/sopas.png" alt="">
                 <p>Sopas</p>
             </div>
-            </router-link>
 
-            <router-link to="/">
-                <div class="categoria-items">
-                    <img src="../assets/comida.png" alt="">
-                    <p>Comida</p>
-                </div>
-            </router-link>
+            <div class="categoria-items">
+                <img src="../assets/comida.png" alt="">
+                <p>Comida</p>
+            </div>
+        
+            <div class="categoria-items">
+                <img src="../assets/massa.png" alt="">
+                <p>Massas</p>
+            </div>
 
-            <router-link to="/">
-                <div class="categoria-items">
-                    <img src="../assets/massa.png" alt="">
-                    <p>Massas</p>
-                </div>
-            </router-link>
-
-            <router-link to="/">
-                <div class="categoria-items">
-                    <img src="../assets/aves.png" alt="">
-                    <p>Aves</p>
-                </div>
-            </router-link>
+            <div class="categoria-items">
+                <img src="../assets/aves.png" alt="">
+                <p>Aves</p>
+            </div>
             
         </div>
         <div>
             <h1 class="titulo">Todas as receitas</h1>
-            <div class="pesquisar">
-                <img src="../assets/pesquisar.png" alt="">
-                <input type="text" id="pesquisar" name="pesquisar" placeholder="Faça uma busca...">
-            </div>
+            <ProdutoBuscar/>
         </div>
-        <div class="receitas" v-if="receitas">
-            <div v-for="(receita, index) in receitas" :key="receita + index">
-                <router-link :to="{name: 'produto', params: {id: receita.id_receita}}">
-                    <img :src="receita.imagem" alt="">
-                    <span>{{receita.categoria}}</span>
-                    <p>{{receita.nome_receita}}</p>
-                </router-link>
+        <div v-if="carregou == 0">
+            <p>Carregando...</p>
+        </div>
+        <div v-else>
+            <div class="receitas" v-if="receitas.length > 0">
+                <div v-for="(receita, index) in receitas" :key="receita + index">
+                    <router-link :to="{name: 'produto', params: {id: receita.id_receita}}">
+                        <img :src="receita.imagem" alt="">
+                        <span>{{receita.categoria}}</span>
+                        <p>{{receita.nome_receita}}</p>
+                    </router-link>
+                </div>
             </div>
+            <p v-else>Nenhum receita encontrada!</p>
         </div>
     </section>
 </template>
 
 <script>
 import axios from 'axios'
+import ProdutoBuscar from "../components/ProdutoBuscar.vue"
+import {serialize} from "../helpers.js"
 
 export default {
     name: "ListItems",
+    components: {
+        ProdutoBuscar
+    },
     data() {
         return {
-            receitas: null
+            receitas: null,
+            carregou: 0 
         }
     },
     methods: {
-        buscarReceitas() {
+        async buscarReceitas() {
             axios({
                 method: 'GET',
-                url: 'http://127.0.0.1:8000/receita/'
+                url: this.url
             })
             .then(res => {
                 this.receitas = res.data
+                this.carregou = 1
             })
+        },
+        ola() {
+            console.log("opa")
+        }
+    },
+    computed: {
+        url() {
+            const query = serialize(this.$route.query)
+            return `http://127.0.0.1:8000/receita/${query}`
+        }
+    },
+    watch: {
+        url() {
+            this.buscarReceitas()
         }
     },
     created() {
@@ -131,8 +141,9 @@ export default {
     font-size: 14px;
 }
 
-.categoria a:hover {
+.categoria-items:hover {
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 .pesquisar {

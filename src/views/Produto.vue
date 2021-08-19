@@ -1,7 +1,8 @@
 <template>
     <section class="produto">
-        <div v-if="pessoa">
-            <div>
+
+        <div v-if="pessoa" class="pessoa">
+            <div v-if="pessoa.foto">
                 <img class="foto-pessoa" :src="pessoa.foto" alt="">
             </div>
             <div class="info-pessoa">
@@ -9,31 +10,49 @@
                 <p>de <span>{{pessoa.cidade}}</span></p>
             </div>
         </div>
+
         <div class="introducao-produto">
-            <img :src="produto[0].imagem" alt="">
+            <img :src="produto.imagem" alt="">
             <div>
-                <h1>{{produto[0].nome_receita}}</h1>
-                <p>{{produto[0].descricao}}</p>
+                <h1>{{produto.nome_receita}}</h1>
+                <p>{{produto.descricao}}</p>
             </div>
         </div>
+
         <div class="infos-produto">
-            <div>
+            <div class="items">
                 <h2>Convidados</h2>
-                <p>{{produto[0].serve}}</p>
+                <p>{{produto.serve}}</p>
             </div>
-            <div>
+            <div class="items">
                 <h2>Tempo</h2>
-                <p>{{produto[0].tempo}} min</p>
+                <p>{{produto.tempo}} min</p>
             </div>
-            <div>
+            <div class="items">
                 <h2>Categoria</h2>
-                <p>{{produto[0].categoria}}</p>
+                <p>{{produto.categoria}}</p>
             </div>
-            <div>
+            <div class="items">
                 <h2>Dificuldade</h2>
-                <p>{{produto[0].dificuldade}}</p>
+                <p>{{produto.dificuldade}}</p>
             </div>
         </div>
+
+        <div class="ingredientes items">
+            <h2>Ingredientes</h2>
+            <div v-for="(ingredientes, index) in produto.ingredientes" :key="ingredientes+index">
+                <input type="checkbox">
+                <label for="">{{ingredientes}}</label>
+            </div>
+        </div>
+
+        <div class="modo-preparo items">
+            <h2>Ingredientes</h2>
+            <div v-for="(passo, index) in produto.modo_preparo" :key="passo+index">
+                <p>{{index + 1}} - {{passo}}</p>
+            </div>
+        </div>
+
     </section>
 </template>
 
@@ -46,7 +65,7 @@ export default {
     data() {
         return {
             produto: null,
-            pessoa: null
+            pessoa: null,
         }
     },
     methods: {
@@ -56,7 +75,11 @@ export default {
                 url: `http://127.0.0.1:8000/receita/?id=${this.id}`
             })
             .then(res => {
-                this.produto = res.data
+                const ingredientes = res.data[0].ingredientes.split(",")
+                const modo_preparo = res.data[0].modo_preparo.split(";")
+                this.produto = res.data[0]
+                this.produto.ingredientes = ingredientes
+                this.produto.modo_preparo = modo_preparo
                 this.mostrarPessoaQueCriou(res.data[0].email_criador)
             })
         },
@@ -84,7 +107,7 @@ export default {
     padding: 0 60px;
 }
 
-.produto > div {
+.pessoa {
     display: flex;
     align-items: center;
 }
@@ -97,10 +120,15 @@ export default {
 
 .info-pessoa {
     margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 .info-pessoa span {
     color: #759F41;
+}
+
+.introducao-produto {
+    display: flex;
 }
 
 .introducao-produto img {
@@ -123,20 +151,62 @@ export default {
     text-align: center;
 }
 
-.infos-produto div {
+.items {
     background-color: #F3F5F6;
     padding: 10px 30px;
 }
 
-.infos-produto h2 {
+.items h2 {
     font-size: 24px;
     color: #759F41;
+    text-align: center;
 }
 
-.infos-produto p {
+.items p {
     font-size: 1rem;
     color: #727B7A;
     margin-top: 10px;
 }
+
+.ingredientes {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.ingredientes h2 {
+    margin-bottom: 10px;
+}
+
+.ingredientes > div {
+    display: inline-block;
+    align-items: center;
+    margin: 20px 20px;
+    box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
+    padding: 5px;
+    border-radius: 4px;
+    color: #727B7A;
+    max-width: 50%;
+}
+
+input {
+    width: 20px;
+    padding: 0px;
+    margin: 0px 10px 0px;
+}
+
+::marker {
+    color: #759F41;
+}
+
+.medo-preparo {
+    text-align: initial;
+}
+
+.modo-preparo p {
+    margin-top: 20px;
+}
+
 
 </style>

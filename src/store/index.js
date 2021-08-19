@@ -17,6 +17,9 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
+    logarUsuario(context) {
+      context.commit()
+    }
   },
   modules: {
   }
