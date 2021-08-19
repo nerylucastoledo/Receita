@@ -9,8 +9,10 @@
                 <li><router-link to="/minhas-receitas">Minhas Receitas</router-link></li>
             </ul>
             <div class="entrar-header">
-                <img src="../assets/icon-pessoa.png" alt="">
-                <router-link to="/login"><button class="btn">Login</button></router-link>
+                <span>{{nomeUsuario}}</span>
+                <img v-if="!$store.state.usuarioLogado" src="../assets/icon-pessoa.png" alt="">
+                <button v-if="$store.state.usuarioLogado" @click="deslogarUsuario" class="btn deslogar">Sair</button>
+                <router-link v-else to="/login"><button class="btn">Login</button></router-link>
             </div>
         </nav>
     </section>
@@ -20,6 +22,17 @@
 
 export default {
     name: "Header",
+    computed: {
+        nomeUsuario() {
+            return this.$store.state.dadosUsuario.nome
+        }
+    },
+    methods: {
+        deslogarUsuario() {
+            this.$store.dispatch("deslogarUsuario")
+            this.$router.push("login")
+        }
+    }
 }
 </script>
 
@@ -82,6 +95,14 @@ export default {
 
 .entrar-header button:hover {
     transform: scale(1.2);
+}
+
+.deslogar {
+    background-color: red!important;
+}
+
+.entrar-header span {
+    margin-right: 15px;
 }
 
 </style>

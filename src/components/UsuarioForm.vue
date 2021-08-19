@@ -21,6 +21,9 @@
             <label for="cidade">Cidade</label>
             <input type="text" name="cidade" id="cidade" v-model="usuario.cidade"  placeholder="Cidade">
 
+            <label for="imagem">Imagem</label>
+            <input type="file" name="imagem" id="imagem" ref="imagem" />
+
             <div class="button">
                 <button @click.prevent="cadastrarUsuario" class="btn btn-form cadastrar">Cadastrar</button>
             </div>
@@ -29,6 +32,8 @@
 </template>
 
 <script>
+import axios from "axios"
+
 export default {
     data() {
         return {
@@ -38,25 +43,38 @@ export default {
                 senha: "",
                 sobrenome: "",
                 estado: "",
-                cidade: ""
+                cidade: "",
+                imagem: null
             }
         }
     },
     methods: {
         cadastrarUsuario() {
-            fetch("http://127.0.0.1:8000/usuario/?email=", {
-                method: "POST",
+            const form = new FormData();
+            const file = this.$refs.imagem.files[0]
+            console.log(file)
+
+            form.append("nome", this.usuario.nome)
+            form.append("email", this.usuario.email)
+            form.append("senha", this.usuario.senha)
+            form.append("sobrenome", this.usuario.sobrenome)
+            form.append("estado", this.usuario.estado)
+            form.append("cidade", this.usuario.cidade)
+            form.append("imagem", file)
+
+            axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:8000/usuario/',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'multipart/form-data'
                 },
-                body: JSON.stringify(this.usuario)
+                data: form
             })
         }
     }
 }
 </script>
 
-<style>
-
+<style scoped>
     
 </style>

@@ -17,6 +17,7 @@
 <script>
 import LoginCriar from "../components/LoginCriar.vue"
 import axios from "axios"
+import { mapState } from 'vuex'
 
 export default {
     data() {
@@ -28,6 +29,9 @@ export default {
     components: {
         LoginCriar
     },
+    computed: {
+        ...mapState(["dadosUsuario"])
+    },
     methods: {
         fazerLogin(email, senha) {
             axios({
@@ -36,8 +40,15 @@ export default {
             })
             .then(res => {
                 const senhaApi = res.data[0].senha
+                
                 if(senhaApi == senha) {
+                    this.dadosUsuario.nome = res.data[0].nome
+                    this.dadosUsuario.sobrenome = res.data[0].sobrenome
+                    this.dadosUsuario.email = res.data[0].email
+                    this.dadosUsuario.estado = res.data[0].estado
+                    this.dadosUsuario.cidade = res.data[0].cidade
                     this.$router.push('minhas-receitas')
+                    this.$store.dispatch("logarUsuario")
                 } else {
                     console.log('Não pode')
                 }
@@ -73,7 +84,6 @@ form label {
 .cadastrar {
     display: block;
     margin: 20px auto;
-    width: 100%;
 }
 
 </style>
