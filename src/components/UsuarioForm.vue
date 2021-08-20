@@ -52,7 +52,6 @@ export default {
         cadastrarUsuario() {
             const form = new FormData();
             const file = this.$refs.imagem.files[0]
-            console.log(file)
 
             form.append("nome", this.usuario.nome)
             form.append("email", this.usuario.email)

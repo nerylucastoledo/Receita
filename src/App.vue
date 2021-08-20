@@ -65,4 +65,44 @@ body {
   background: url('./assets/background.jpg');
 }
 
+.receitas {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 30px;
+    margin: 30px;
+}
+
+.receitas div {
+    flex: 1;
+}
+
+.receitas img{
+    max-width: 100%;
+    height: 220px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
+}
+
+.receitas span {
+    position: relative;
+    bottom: 28px;
+    background-color: #fff;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    max-width: 100px;
+    margin: 0 auto;
+    border-radius: 4px;
+    color: #727B7A;
+}
+
+.receitas p {
+    text-align: center;
+    margin-top: -10px;
+    color: #000;
+}
+
 </style>

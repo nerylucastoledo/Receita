@@ -43,14 +43,12 @@ export default {
                 
                 if(senhaApi == senha) {
                     this.dadosUsuario.nome = res.data[0].nome
-                    this.dadosUsuario.sobrenome = res.data[0].sobrenome
-                    this.dadosUsuario.email = res.data[0].email
-                    this.dadosUsuario.estado = res.data[0].estado
-                    this.dadosUsuario.cidade = res.data[0].cidade
+
+                    localStorage.setItem("email", res.data[0].email)
+                    localStorage.setItem("senha", res.data[0].senha)
+
                     this.$router.push('minhas-receitas')
                     this.$store.dispatch("logarUsuario")
-                } else {
-                    console.log('Não pode')
                 }
             })
         }

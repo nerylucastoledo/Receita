@@ -1,6 +1,6 @@
 <template>
     <section class="produto">
-
+        {{pessoa.foto}}
         <div v-if="pessoa" class="pessoa">
             <div v-if="pessoa.foto">
                 <img class="foto-pessoa" :src="pessoa.foto" alt="">
@@ -89,6 +89,7 @@ export default {
                 url: `http://127.0.0.1:8000/usuario/?email=${email}`
             })
             .then(res => {
+                console.log(res.data[0])
                 this.pessoa = res.data[0]
             })
         }

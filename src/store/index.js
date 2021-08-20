@@ -17,7 +17,10 @@ export default new Vuex.Store({
   mutations: {
     LOGARDESLOGARUSUARIO(state, payload) {
       state.usuarioLogado = payload
-      console.log(payload)
+    },
+    INSERIRDADOS(state, payload) {
+      state.dadosUsuario.email = payload.email
+      state.dadosUsuario.nome = payload.nome
     }
   },
   actions: {
@@ -26,6 +29,9 @@ export default new Vuex.Store({
     },
     deslogarUsuario(context) {
       context.commit("LOGARDESLOGARUSUARIO", false)
+    },
+    informarUsuario(context, payload) {
+      context.commit("INSERIRDADOS", payload)
     }
   },
   modules: {

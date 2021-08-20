@@ -9,7 +9,6 @@
                 <li><router-link to="/minhas-receitas">Minhas Receitas</router-link></li>
             </ul>
             <div class="entrar-header">
-                <span>{{nomeUsuario}}</span>
                 <img v-if="!$store.state.usuarioLogado" src="../assets/icon-pessoa.png" alt="">
                 <button v-if="$store.state.usuarioLogado" @click="deslogarUsuario" class="btn deslogar">Sair</button>
                 <router-link v-else to="/login"><button class="btn">Login</button></router-link>
@@ -30,7 +29,7 @@ export default {
     methods: {
         deslogarUsuario() {
             this.$store.dispatch("deslogarUsuario")
-            this.$router.push("login")
+            this.$router.push('login')
         }
     }
 }
