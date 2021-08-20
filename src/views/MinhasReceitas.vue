@@ -1,12 +1,14 @@
 <template>
     <section id="minhas-receitas">
+        <h1 class="titulo">Suas Receitas</h1>
         <div class="receitas" v-if="minhasReceitas.length > 0">
             <div v-for="(receita, index) in minhasReceitas" :key="receita + index">
                 <img :src="receita.imagem" alt="">
                 <p>{{receita.nome_receita}}</p>
             </div>
         </div>
-        <p v-else>Nenhum receita encontrada!</p>
+        <p class="nada-encontrado" v-else>Nenhum receita encontrada! :(</p>
+        <router-link to="/cadastrar-receita" class="btn cadastrar">Cadastrar Receita</router-link>
     </section>
 </template>
 
@@ -22,14 +24,15 @@ export default {
     },
     methods: {
         pegarMeusProdutos() {
-            axios({
-                method: 'GET',
-                url: `http://127.0.0.1:8000/receita/?email_criador=${this.$store.state.dadosUsuario.email}`
-            })
-            .then(res => {
-                console.log(res.data)
-                this.minhasReceitas = res.data
-            })
+            if(this.$store.state.dadosUsuario.email) {
+                axios({
+                    method: 'GET',
+                    url: `http://127.0.0.1:8000/receita/?email_criador=${this.$store.state.dadosUsuario.email}`
+                })
+                .then(res => {
+                    this.minhasReceitas = res.data
+                })
+            }
         }
     },
     created() {
@@ -47,6 +50,15 @@ export default {
 
 .receitas p {
     margin-top: 10px;
+}
+
+.nada-encontrado {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.cadastrar {
+    max-width: 200px;
 }
 
 </style>

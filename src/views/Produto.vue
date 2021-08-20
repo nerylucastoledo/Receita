@@ -1,6 +1,5 @@
 <template>
     <section class="produto">
-        {{pessoa.foto}}
         <div v-if="pessoa" class="pessoa">
             <div v-if="pessoa.foto">
                 <img class="foto-pessoa" :src="pessoa.foto" alt="">

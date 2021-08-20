@@ -24,7 +24,7 @@ label, textarea {
   margin-bottom: 5px;
 }
 
-input, textarea {
+input, textarea, select {
   border-radius: 4px;
   border: 1px solid #fff;
   padding: 15px;

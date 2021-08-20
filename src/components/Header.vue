@@ -30,6 +30,9 @@ export default {
         deslogarUsuario() {
             this.$store.dispatch("deslogarUsuario")
             this.$router.push('login')
+            this.$store.state.dadosUsuario.nome = ""
+            this.$store.state.dadosUsuario.email = ""
+            localStorage.clear()
         }
     }
 }

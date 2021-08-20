@@ -43,6 +43,7 @@ export default {
                 
                 if(senhaApi == senha) {
                     this.dadosUsuario.nome = res.data[0].nome
+                    this.dadosUsuario.email = res.data[0].email
 
                     localStorage.setItem("email", res.data[0].email)
                     localStorage.setItem("senha", res.data[0].senha)

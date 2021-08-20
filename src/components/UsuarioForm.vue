@@ -21,8 +21,8 @@
             <label for="cidade">Cidade</label>
             <input type="text" name="cidade" id="cidade" v-model="usuario.cidade"  placeholder="Cidade">
 
-            <label for="imagem">Imagem</label>
-            <input type="file" name="imagem" id="imagem" ref="imagem" />
+            <label for="foto">Foto</label>
+            <input type="file" name="foto" id="foto" multiple ref="foto" />
 
             <div class="button">
                 <button @click.prevent="cadastrarUsuario" class="btn btn-form cadastrar">Cadastrar</button>
@@ -44,14 +44,14 @@ export default {
                 sobrenome: "",
                 estado: "",
                 cidade: "",
-                imagem: null
+                foto: null
             }
         }
     },
     methods: {
         cadastrarUsuario() {
             const form = new FormData();
-            const file = this.$refs.imagem.files[0]
+            const file = this.$refs.foto.files[0]
 
             form.append("nome", this.usuario.nome)
             form.append("email", this.usuario.email)
@@ -59,7 +59,7 @@ export default {
             form.append("sobrenome", this.usuario.sobrenome)
             form.append("estado", this.usuario.estado)
             form.append("cidade", this.usuario.cidade)
-            form.append("imagem", file)
+            form.append("foto", file)
 
             axios({
                 method: 'POST',
@@ -68,6 +68,8 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 },
                 data: form
+            }).then(res => {
+                console.log(res)
             })
         }
     }

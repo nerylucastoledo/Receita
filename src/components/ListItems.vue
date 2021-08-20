@@ -2,37 +2,37 @@
     <section id="pagina-inicial">
         <h1 class="titulo">Navegue pelas categorias</h1>
         <div class="categoria">
-            <div class="categoria-items">
+            <div class="categoria-items" @click="filtroCategoria('Pao')">
                 <img src="../assets/paes.png" alt="">
                 <p>Pães</p>
             </div>
 
-            <div class="categoria-items">
+            <div class="categoria-items" @click="filtroCategoria('Sobremesa')">
                 <img src="../assets/sobremesa.png" alt="">
                 <p>Sobremesa</p>
             </div>
         
-            <div class="categoria-items">
+            <div class="categoria-items" @click="filtroCategoria('Salgados')">
                 <img src="../assets/salgados.png" alt="">
                 <p>Salgados</p>
             </div>
         
-            <div class="categoria-items">
+            <div class="categoria-items" @click="filtroCategoria('Sopas')">
                 <img src="../assets/sopas.png" alt="">
                 <p>Sopas</p>
             </div>
 
-            <div class="categoria-items">
+            <div class="categoria-items" @click="filtroCategoria('Comida')">
                 <img src="../assets/comida.png" alt="">
                 <p>Comida</p>
             </div>
         
-            <div class="categoria-items">
+            <div class="categoria-items" @click="filtroCategoria('Massas')">
                 <img src="../assets/massa.png" alt="">
                 <p>Massas</p>
             </div>
 
-            <div class="categoria-items">
+            <div class="categoria-items" @click="filtroCategoria('Aves')">
                 <img src="../assets/aves.png" alt="">
                 <p>Aves</p>
             </div>
@@ -55,7 +55,7 @@
                     </router-link>
                 </div>
             </div>
-            <p v-else>Nenhum receita encontrada!</p>
+            <p class="nenhum-encontrada" v-else>Nenhum receita encontrada! :(</p>
         </div>
     </section>
 </template>
@@ -87,8 +87,15 @@ export default {
                 this.carregou = 1
             })
         },
-        ola() {
-            console.log("opa")
+        filtroCategoria(recebido) {
+            this.$router.push({query: {categoria: recebido}})
+            axios({
+                method: 'GET',
+                url: this.url
+            })
+            .then(res => {
+                this.receitas = res.data
+            })
         }
     },
     computed: {
@@ -165,6 +172,10 @@ export default {
     height: 30px;
     left: 250px;
     top: 45px;
+}
+
+.nenhum-encontrada {
+    text-align: center;
 }
 
 </style>
