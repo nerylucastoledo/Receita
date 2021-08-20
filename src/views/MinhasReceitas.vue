@@ -8,7 +8,7 @@
             </div>
         </div>
         <p class="nada-encontrado" v-else>Nenhum receita encontrada! :(</p>
-        <router-link to="/cadastrar-receita" class="btn cadastrar">Cadastrar Receita</router-link>
+        <router-link v-if="this.$store.state.dadosUsuario.email" to="/cadastrar-receita" class="btn cadastrar">Cadastrar Receita</router-link>
     </section>
 </template>
 

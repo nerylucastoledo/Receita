@@ -14,6 +14,12 @@ export default {
   components: {
     Header,
     Footer
+  },
+  created() {
+    const logado = localStorage.getItem('email')
+    if(logado) {
+      this.$store.dispatch('pegarUsuario', logado)
+    }
   }
 }
 </script>

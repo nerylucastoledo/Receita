@@ -68,8 +68,6 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 },
                 data: form
-            }).then(res => {
-                console.log(res)
             })
         }
     }

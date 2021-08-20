@@ -2,13 +2,13 @@
     <section class="cadastrar-receita">
         <form class="adicionar-produto">
             <label for="nome_receita">Nome da Receita</label>
-            <input type="text" name="nome_receita" id="nome_receita" v-model="produto.nome_receita" />
+            <input type="text" name="nome_receita" placeholder='Nome da sua receita' id="nome_receita" v-model="produto.nome_receita" />
 
             <label for="serve">Pessoas</label>
-            <input type="number" name="serve" id="serve" v-model="produto.serve" />
+            <input type="number" name="serve" placeholder='Quantidade de pessoas' id="serve" v-model="produto.serve" />
 
             <label for="tempo">Tempo</label>
-            <input type="number" name="tempo" id="tempo" v-model="produto.tempo" />
+            <input type="number" name="tempo" placeholder='Insira o tempo em minutos' id="tempo" v-model="produto.tempo" />
 
             <label for="dificudlade">Dificuldade</label>
             <select name="dificuldade" id="dificuldade" v-model="produto.dificuldade">
@@ -29,13 +29,13 @@
             </select>
 
             <label for="descricao">Descrição</label>
-            <input name="descricao" id="descricao" v-model="produto.descricao">
+            <input name="descricao" id="descricao" placeholder='Insira a descrição' v-model="produto.descricao">
 
             <label for="ingredientes">Ingredientes</label>
-            <textarea name="ingredientes" id="ingredientes" v-model="produto.ingredientes"></textarea>
+            <textarea name="ingredientes" id="ingredientes" placeholder='Separe os ingredientes por ","' v-model="produto.ingredientes"></textarea>
             
             <label for="modo_preparo">Modo de Preparo</label>
-            <textarea name="modo_preparo" id="modo_preparo" v-model="produto.modo_preparo"></textarea>
+            <textarea name="modo_preparo" id="modo_preparo" placeholder='Separe os passos por ";"' v-model="produto.modo_preparo"></textarea>
 
             <label for="imagem">Imagem</label>
             <input type="file" name="imagem" id="imagem" multiple ref="imagem" />
@@ -96,4 +96,11 @@ export default {
 
 <style scoped>
 
+.cadastrar-receita {
+    margin-top: 40px;
+}
+
+::placeholder {
+    font-size: 14px;
+}
 </style>

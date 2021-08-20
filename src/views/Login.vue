@@ -2,13 +2,14 @@
     <section class="login">
         <h1>Login</h1>
         <form>
-            <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" v-model="email" required placeholder="E-mail">
+            <label for="emailLogar">E-mail</label>
+            <input type="email" name="emailLogar" id="emailLogar" v-model="emailLogar" placeholder="E-mail" required>
 
             <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" v-model="senha" required placeholder="Senha">
-
-            <button @click.prevent="fazerLogin(email, senha)" class="btn cadastrar">Entrar</button>
+            <input type="password" autocomplete="on" name="senha" id="senha" v-model="senha" placeholder="Senha" required>
+            <p class="login_incorreto" v-if="senhaIncorreta">E-mail ou senha incorretos!</p>
+            <p class="pedirParaCadastrar" v-if="pedirParaCadastrar">E-mail não encontrado! Crie uma conta</p>
+            <input type="submit" @click.prevent="fazerLogin(emailLogar, senha)" class="btn cadastrar" value="Entrar">
         </form>
         <LoginCriar/>
     </section>
@@ -22,8 +23,10 @@ import { mapState } from 'vuex'
 export default {
     data() {
         return {
-            email: "",
-            senha: ""
+            emailLogar: "",
+            senha: "",
+            senhaIncorreta: null,
+            pedirParaCadastrar: null
         }
     },
     components: {
@@ -39,9 +42,10 @@ export default {
                 url: `http://127.0.0.1:8000/usuario/?email=${email}`
             })
             .then(res => {
-                const senhaApi = res.data[0].senha
-                
-                if(senhaApi == senha) {
+                if (res.data.length == 0) {
+                    this.pedirParaCadastrar = true
+                } else if(res.data[0].senha == senha) {
+
                     this.dadosUsuario.nome = res.data[0].nome
                     this.dadosUsuario.email = res.data[0].email
 
@@ -50,6 +54,9 @@ export default {
 
                     this.$router.push('minhas-receitas')
                     this.$store.dispatch("logarUsuario")
+                } else {
+                    this.senhaIncorreta = true
+                    this.pedirParaCadastrar = null
                 }
             })
         }
@@ -69,6 +76,21 @@ export default {
     margin: 20px 0px;
     font-size: 2rem;
     text-align: center;
+}
+
+.login p {
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.login_incorreto {
+    background-color: red;
+}
+
+.pedirParaCadastrar {
+    background-color: yellow;
 }
 
 form {

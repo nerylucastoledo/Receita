@@ -32,6 +32,14 @@ export default new Vuex.Store({
     },
     informarUsuario(context, payload) {
       context.commit("INSERIRDADOS", payload)
+    },
+    pegarUsuario(context, payload) {
+      fetch(`http://127.0.0.1:8000/usuario/?email=${payload}`)
+      .then(req => req.json())
+      .then(res => {
+        context.commit('INSERIRDADOS', res[0])
+        context.commit('LOGARDESLOGARUSUARIO', true)
+      })
     }
   },
   modules: {

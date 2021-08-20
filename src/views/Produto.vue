@@ -10,45 +10,47 @@
             </div>
         </div>
 
-        <div class="introducao-produto">
-            <img :src="produto.imagem" alt="">
-            <div>
-                <h1>{{produto.nome_receita}}</h1>
-                <p>{{produto.descricao}}</p>
+        <div v-if="produto">
+            <div class="introducao-produto">
+                <img :src="produto.imagem" alt="">
+                <div>
+                    <h1>{{produto.nome_receita}}</h1>
+                    <p>{{produto.descricao}}</p>
+                </div>
             </div>
-        </div>
 
-        <div class="infos-produto">
-            <div class="items">
-                <h2>Convidados</h2>
-                <p>{{produto.serve}}</p>
+            <div class="infos-produto">
+                <div class="items">
+                    <h2>Convidados</h2>
+                    <p>{{produto.serve}}</p>
+                </div>
+                <div class="items">
+                    <h2>Tempo</h2>
+                    <p>{{produto.tempo}} min</p>
+                </div>
+                <div class="items">
+                    <h2>Categoria</h2>
+                    <p>{{produto.categoria}}</p>
+                </div>
+                <div class="items">
+                    <h2>Dificuldade</h2>
+                    <p>{{produto.dificuldade}}</p>
+                </div>
             </div>
-            <div class="items">
-                <h2>Tempo</h2>
-                <p>{{produto.tempo}} min</p>
-            </div>
-            <div class="items">
-                <h2>Categoria</h2>
-                <p>{{produto.categoria}}</p>
-            </div>
-            <div class="items">
-                <h2>Dificuldade</h2>
-                <p>{{produto.dificuldade}}</p>
-            </div>
-        </div>
 
-        <div class="ingredientes items">
-            <h2>Ingredientes</h2>
-            <div v-for="(ingredientes, index) in produto.ingredientes" :key="ingredientes+index">
-                <input type="checkbox">
-                <label for="">{{ingredientes}}</label>
+            <div class="ingredientes items">
+                <h2>Ingredientes</h2>
+                <div v-for="(ingredientes, index) in produto.ingredientes" :key="ingredientes+index">
+                    <input type="checkbox">
+                    <label for="">{{ingredientes}}</label>
+                </div>
             </div>
-        </div>
 
-        <div class="modo-preparo items">
-            <h2>Ingredientes</h2>
-            <div v-for="(passo, index) in produto.modo_preparo" :key="passo+index">
-                <p>{{index + 1}} - {{passo}}</p>
+            <div class="modo-preparo items">
+                <h2>Modo de preparo</h2>
+                <div v-for="(passo, index) in produto.modo_preparo" :key="passo+index">
+                    <p>{{index + 1}} - {{passo}}</p>
+                </div>
             </div>
         </div>
 
@@ -88,7 +90,6 @@ export default {
                 url: `http://127.0.0.1:8000/usuario/?email=${email}`
             })
             .then(res => {
-                console.log(res.data[0])
                 this.pessoa = res.data[0]
             })
         }
@@ -175,13 +176,13 @@ export default {
     text-align: center;
 }
 
+
 .ingredientes h2 {
     margin-bottom: 10px;
 }
 
 .ingredientes > div {
     display: inline-block;
-    align-items: center;
     margin: 20px 20px;
     box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
     padding: 5px;
