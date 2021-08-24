@@ -5,7 +5,7 @@
                 <h3>Receba nossas novidades</h3>
                 <div class="email">
                     <input type="email" name="email" id="email" placeholder="Digite seu e-mail">
-                 <button class="btn">Enviar</button>
+                    <button class="btn">Enviar</button>
                 </div>
             </div>
             <div class="redes-sociais">
@@ -16,7 +16,7 @@
                     <img src="../assets/twitter.png" alt="Logo Twitter">
                 </div>
             </div>
-            <div>
+            <div class="logo-footer">
                 <img src="../assets/logo.png" alt="">
             </div>
         </div>
@@ -80,4 +80,14 @@ footer img {
 .email .btn {
     margin-left: 10px;
 }
+
+@media (max-width: 510px) {
+    .redes-sociais {
+        margin-top: 40px;
+    }
+    .receber-novidades {
+        padding: 0px 10px;
+    }
+}
+
 </style>

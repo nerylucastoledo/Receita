@@ -130,6 +130,7 @@ export default {
 
 .introducao-produto {
     display: flex;
+    flex: 1;
 }
 
 .introducao-produto img {
@@ -150,11 +151,14 @@ export default {
     margin-top: 40px;
     justify-content: space-around;
     text-align: center;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 
 .items {
     background-color: #F3F5F6;
     padding: 10px 30px;
+    margin: 10px 0px;
 }
 
 .items h2 {
@@ -209,5 +213,23 @@ input {
     margin-top: 20px;
 }
 
-
+@media (max-width: 750px) {
+    .introducao-produto {
+        display: block;
+    }
+    .introducao-produto p {
+        margin-top: 20px;
+    }
+    .introducao-produto img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .introducao-produto p, .introducao-produto h1 {
+        margin-left: 0px;
+        text-align: center;
+    }
+    .items {
+        width: 100%;
+    }
+}
 </style>

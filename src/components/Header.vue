@@ -107,4 +107,22 @@ export default {
     margin-right: 15px;
 }
 
+@media (max-width: 620px) {
+    #menu {
+        display: block;
+    }
+    #menu img {
+        display: block;
+        margin: 0 auto;
+    }
+    #menu ul {
+        margin-top: 20px;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .entrar-header {
+        display: none;
+    }
+}   
+
 </style>

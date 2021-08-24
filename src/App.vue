@@ -85,7 +85,7 @@ body {
 
 .receitas img{
     max-width: 100%;
-    height: 220px;
+    height: 70%;
     display: block;
     margin: 0 auto;
     border-radius: 4px;
@@ -107,8 +107,37 @@ body {
 
 .receitas p {
     text-align: center;
-    margin-top: -10px;
+    margin-top: -20px;
     color: #000;
 }
+
+@media (max-width: 759px) {
+
+  .logo-footer {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 620px) {
+  .categoria {
+    display: none;
+  }
+
+  .titulo {
+    margin-top: 40px;
+  }
+
+  .receitas {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 30px;
+    margin: 30px;
+  }
+
+  .receitas span {
+    font-size: 14px;
+  }
+}   
 
 </style>

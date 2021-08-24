@@ -2,10 +2,12 @@
     <section id="minhas-receitas">
         <h1 class="titulo">Suas Receitas</h1>
         <div class="receitas" v-if="minhasReceitas.length > 0">
-            <div v-for="(receita, index) in minhasReceitas" :key="receita + index">
-                <img :src="receita.imagem" alt="">
-                <p>{{receita.nome_receita}}</p>
-            </div>
+                <div v-for="(receita, index) in minhasReceitas" :key="receita + index">
+                    <router-link :to="{name: 'atualizar-receita', params: {id: receita.id_receita}}">
+                        <img :src="receita.imagem" alt="">
+                        <p>{{receita.nome_receita}}</p>
+                    </router-link>
+                </div>
         </div>
         <p class="nada-encontrado" v-else>Nenhum receita encontrada! :(</p>
         <router-link v-if="this.$store.state.dadosUsuario.email" to="/cadastrar-receita" class="btn cadastrar">Cadastrar Receita</router-link>

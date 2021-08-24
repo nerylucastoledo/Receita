@@ -1,33 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
  
-@nerylucastoledo 
-nerylucastoledo
-/
-Ranek
-1
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-Ranek/src/components/ProdutosBuscar.vue
-@nerylucastoledo
-nerylucastoledo estilo dos inputs e produto
-Latest commit dbe999a on Jul 13
- History
- 1 contributor
-58 lines (50 sloc)  986 Bytes
-  
 <template>
   <div class="produtosbuscar">
     <form>
@@ -56,7 +27,7 @@ export default {
 
 <style scoped>
   form {
-    max-width: 600px;
+    max-width: 400px;
     margin: 30px auto 60px auto;
     position: relative;
   }

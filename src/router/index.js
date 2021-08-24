@@ -5,6 +5,7 @@ import MinhasReceitas from '../views/MinhasReceitas.vue'
 import Produto from "../views/Produto.vue"
 import Login from '../views/Login.vue'
 import CadastraReceita from "../views/CadastraReceita.vue"
+import AtualizarReceita from "../views/AtualizarReceita.vue"
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,12 @@ const routes = [
     path: '/cadastrar-receita',
     name: 'cadastrar-receita',
     component: CadastraReceita,
+  },
+  {
+    path: '/atualizar-receita',
+    name: 'atualizar-receita',
+    component: AtualizarReceita,
+    props: true
   },
 ]
 

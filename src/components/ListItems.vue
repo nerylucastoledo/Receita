@@ -1,40 +1,42 @@
 <template>
     <section id="pagina-inicial">
-        <h1 class="titulo">Navegue pelas categorias</h1>
         <div class="categoria">
-            <div class="categoria-items" @click="filtroCategoria('Pao')">
-                <img src="../assets/paes.png" alt="">
-                <p>Pães</p>
-            </div>
+            <h1 class="titulo">Navegue pelas categorias</h1>
+            <div>
+                <div class="categoria-items" @click="filtroCategoria('Pao')">
+                    <img src="../assets/paes.png" alt="">
+                    <p>Pães</p>
+                </div>
 
-            <div class="categoria-items" @click="filtroCategoria('Sobremesa')">
-                <img src="../assets/sobremesa.png" alt="">
-                <p>Sobremesa</p>
-            </div>
-        
-            <div class="categoria-items" @click="filtroCategoria('Salgados')">
-                <img src="../assets/salgados.png" alt="">
-                <p>Salgados</p>
-            </div>
-        
-            <div class="categoria-items" @click="filtroCategoria('Sopas')">
-                <img src="../assets/sopas.png" alt="">
-                <p>Sopas</p>
-            </div>
+                <div class="categoria-items" @click="filtroCategoria('Sobremesa')">
+                    <img src="../assets/sobremesa.png" alt="">
+                    <p>Sobremesa</p>
+                </div>
+            
+                <div class="categoria-items" @click="filtroCategoria('Salgados')">
+                    <img src="../assets/salgados.png" alt="">
+                    <p>Salgados</p>
+                </div>
+            
+                <div class="categoria-items" @click="filtroCategoria('Sopas')">
+                    <img src="../assets/sopas.png" alt="">
+                    <p>Sopas</p>
+                </div>
 
-            <div class="categoria-items" @click="filtroCategoria('Comida')">
-                <img src="../assets/comida.png" alt="">
-                <p>Comida</p>
-            </div>
-        
-            <div class="categoria-items" @click="filtroCategoria('Massas')">
-                <img src="../assets/massa.png" alt="">
-                <p>Massas</p>
-            </div>
+                <div class="categoria-items" @click="filtroCategoria('Comida')">
+                    <img src="../assets/comida.png" alt="">
+                    <p>Comida</p>
+                </div>
+            
+                <div class="categoria-items" @click="filtroCategoria('Massas')">
+                    <img src="../assets/massa.png" alt="">
+                    <p>Massas</p>
+                </div>
 
-            <div class="categoria-items" @click="filtroCategoria('Aves')">
-                <img src="../assets/aves.png" alt="">
-                <p>Aves</p>
+                <div class="categoria-items" @click="filtroCategoria('Aves')">
+                    <img src="../assets/aves.png" alt="">
+                    <p>Aves</p>
+                </div>
             </div>
             
         </div>
@@ -123,15 +125,15 @@ export default {
     padding: 0 20px;
 }
 
-.categoria {
+.categoria > div {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
 .categoria-items {
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 95px;
     background-color: #ffc800;
     border-radius: 50%;
     padding: 20px 0px;
@@ -176,6 +178,23 @@ export default {
 
 .nenhum-encontrada {
     text-align: center;
+}
+
+@media (max-width: 759px) {
+  .categoria-items {
+    width: 60px;
+    height: 60px;
+    padding: 15px 0px;
+  }
+
+  .categoria-items img {
+    width: 30px;
+  }
+
+  .categoria-items p {
+    margin-top: 15px;
+    font-size: 12px;
+  }
 }
 
 </style>
