@@ -2,8 +2,7 @@
 <template>
   <div class="produtosbuscar">
     <form>
-      <input type="text" name="busca" id="busca" v-model="busca" placeholder="Buscar..."/>
-      <input type="submit" id="lupa" value="Buscar" @click.prevent="buscarProdutos"/>
+      <input type="text" name="busca" id="busca" v-model="busca" @keyup="buscarProdutos" placeholder="Buscar..."/>
     </form>
   </div>
 </template>
