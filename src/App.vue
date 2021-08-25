@@ -68,7 +68,6 @@ a {
 
 body {
   font-family: cursive;
-  background: url('./assets/background.jpg');
 }
 
 .receitas {

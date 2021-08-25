@@ -54,6 +54,8 @@
             </div>
         </div>
 
+        <Disqus ref="disqus"/>
+
     </section>
 </template>
 
@@ -62,7 +64,9 @@ import axios from 'axios'
 
 export default {
     name: "Produto",
+
     props: ["id"],
+
     data() {
         return {
             produto: null,
