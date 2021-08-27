@@ -1,5 +1,6 @@
 <template>
   <section class="cadastrar-receita">
+
     <form class="adicionar-produto">
       <label for="nome_receita">Nome da Receita</label>
       <input
@@ -7,8 +8,7 @@
         name="nome_receita"
         placeholder="Nome da sua receita"
         id="nome_receita"
-        v-model="produto.nome_receita"
-      />
+        v-model="produto.nome_receita"/>
 
       <label for="serve">Pessoas</label>
       <input
@@ -77,26 +77,35 @@
         class="btn cadastrar"
         type="submit"
         value="Atualizar Receita"
-        @click.prevent="atualizarReceita"
+        @click.prevent="atualizarReceita(produto)"
       />
     </form>
-    <section class="modal" v-if="modal">
-      <div class="modal_container">
+
+    <div v-if="modal">
+      <ModalSucesso>
         <p>Receita atualizada com sucesso!</p>
-      </div>
-    </section>
+      </ModalSucesso>
+    </div>
+
     <p>Ou</p>
+
     <button @click="deletarReceita" class="btn deslogar">
       Deletar Receita
     </button>
+
   </section>
 </template>
 
 <script>
 import { api } from "../service.js";
+import ModalSucesso from "../components/ModalSucesso.vue"
 
 export default {
   props: ["id"],
+
+  components: {
+    ModalSucesso
+  },
 
   data() {
     return {
@@ -163,6 +172,7 @@ export default {
     deletarReceita() {
       if (confirm("Deletar " + this.produto.nome_receita + "?")) {
         api.delete(`receita/${this.id}/`);
+        this.$router.push("minhas-receitas");
       }
     },
   },
@@ -186,32 +196,5 @@ export default {
   display: block;
   margin: 20px auto;
   width: 300px;
-}
-
-/* MODAL */
-
-.modal::before {
-  content: "";
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.modal {
-  position: absolute;
-  bottom: -100px;
-  left: 190px;
-  width: 50%;
-}
-
-.modal_container {
-  position: relative;
-  background: #99ff66;
-  z-index: 1;
-  padding: 20px 20px 20px 20px;
-  color: #fff;
 }
 </style>
