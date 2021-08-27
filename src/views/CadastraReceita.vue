@@ -46,9 +46,10 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { api } from '../service.js'
 
 export default {
+    
     data() {
         return {
             produto: {
@@ -64,6 +65,7 @@ export default {
             },
         }
     },
+
     methods: {
         cadastrarReceita() {
             const form = new FormData();
@@ -81,14 +83,7 @@ export default {
             form.append("categoria", this.produto.categoria)
             form.append("imagem", file)
 
-            axios({
-                method: 'POST',
-                url: 'http://127.0.0.1:8000/receita/',
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: form
-            })
+            api.post('receita/', form)
         }
     }
 }

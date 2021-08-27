@@ -63,54 +63,56 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { api } from '../service.js'
 import ProdutoBuscar from "../components/ProdutoBuscar.vue"
 import {serialize} from "../helpers.js"
 
 export default {
     name: "ListItems",
+    
     components: {
         ProdutoBuscar
     },
+
     data() {
         return {
             receitas: null,
             carregou: 0 
         }
     },
+
     methods: {
+        
         async buscarReceitas() {
-            axios({
-                method: 'GET',
-                url: this.url
-            })
+            api.get(this.url)
             .then(res => {
                 this.receitas = res.data
                 this.carregou = 1
             })
         },
+
         filtroCategoria(recebido) {
             this.$router.push({query: {categoria: recebido}})
-            axios({
-                method: 'GET',
-                url: this.url
-            })
+            api.get(this.url)
             .then(res => {
                 this.receitas = res.data
             })
         }
     },
+
     computed: {
         url() {
             const query = serialize(this.$route.query)
             return `http://127.0.0.1:8000/receita/${query}`
         }
     },
+
     watch: {
         url() {
             this.buscarReceitas()
         }
     },
+
     created() {
         this.buscarReceitas()
     }

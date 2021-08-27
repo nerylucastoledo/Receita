@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { api } from '../service.js'
 
 export default {
     name: "Produto",
@@ -73,12 +73,10 @@ export default {
             pessoa: null,
         }
     },
+
     methods: {
         mostrarProdutoSelecionado() {
-            axios({
-                method: 'GET',
-                url: `http://127.0.0.1:8000/receita/?id=${this.id}`
-            })
+            api.get(`receita/?id=${this.id}`)
             .then(res => {
                 const ingredientes = res.data[0].ingredientes.split(",")
                 const modo_preparo = res.data[0].modo_preparo.split(";")
@@ -88,19 +86,20 @@ export default {
                 this.mostrarPessoaQueCriou(res.data[0].email_criador)
             })
         },
+
         mostrarPessoaQueCriou(email) {
-            axios({
-                method: 'GET',
-                url: `http://127.0.0.1:8000/usuario/?email=${email}`
-            })
+            api.get(`usuario/?email=${email}`)
             .then(res => {
                 this.pessoa = res.data[0]
             })
         }
+
     },
+
     created() {
         this.mostrarProdutoSelecionado()
     }
+    
 }
 </script>
 

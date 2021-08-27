@@ -15,28 +15,28 @@
 </template>
 
 <script>
-import axios from "axios"
+import { api } from "../service.js"
 
 export default {
     name: "MinhasReceitas",
+    
     data() {
         return {
             minhasReceitas: ""
         }
     },
+
     methods: {
         pegarMeusProdutos() {
             if(this.$store.state.dadosUsuario.email) {
-                axios({
-                    method: 'GET',
-                    url: `http://127.0.0.1:8000/receita/?email_criador=${this.$store.state.dadosUsuario.email}`
-                })
+                api.get(`receita/?email_criador=${this.$store.state.dadosUsuario.email}`)
                 .then(res => {
                     this.minhasReceitas = res.data
                 })
             }
         }
     },
+
     created() {
         this.pegarMeusProdutos()
     }

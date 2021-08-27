@@ -40,16 +40,17 @@
             <label for="imagem">Imagem</label>
             <input type="file" name="imagem" id="imagem" multiple ref="imagem" />
 
-            <input class="btn cadastrar" type="submit" value="Adicionar Receita" @click.prevent="cadastrarReceita" />
+            <input class="btn cadastrar" type="submit" value="Atualizar Receita" @click.prevent="atualizarReceita" />
         </form>
     </section>    
 </template>
 
 <script>
-import axios from 'axios'
+import { api } from '../service.js'
 
 export default {
     props: ['id'],
+    
     data() {
         return {
             produto: {
@@ -66,17 +67,17 @@ export default {
             },
         }
     },
+
     methods: {
+
         editarReceita() {
-            axios({
-                method: 'GET',
-                url: `http://127.0.0.1:8000/receita/${this.id}`
-            })
+            api.get(`receita/${this.id}`)
             .then(res => {
                 this.produto = res.data
             })
         },
-        cadastrarReceita() {
+
+        atualizarReceita() {
             const form = new FormData();
             const file = this.$refs.imagem.files[0]
 
@@ -93,16 +94,10 @@ export default {
             form.append("categoria", this.produto.categoria)
             form.append("imagem", file)
 
-            axios({
-                method: 'put',
-                url: `http://127.0.0.1:8000/receita/${this.id}`,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: form
-            })
+            api.put(`receita/${this.id}/`, form)
         }
     },
+
     created() {
         this.editarReceita()
     }

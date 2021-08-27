@@ -11,11 +11,13 @@
 
 export default {
   name: 'ProdutosBuscar',
+  
   data() {
     return {
       busca: ""
     }
   },
+
   methods: {
     buscarProdutos() {
       this.$router.push({query: {nome_receita: this.busca}})

@@ -21,11 +21,13 @@
 
 export default {
     name: "Header",
+
     computed: {
         nomeUsuario() {
             return this.$store.state.dadosUsuario.nome
         }
     },
+    
     methods: {
         deslogarUsuario() {
             this.$store.dispatch("deslogarUsuario")

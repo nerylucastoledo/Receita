@@ -17,10 +17,11 @@
 
 <script>
 import LoginCriar from "../components/LoginCriar.vue"
-import axios from "axios"
+import { api } from "../service.js"
 import { mapState } from 'vuex'
 
 export default {
+    
     data() {
         return {
             emailLogar: "",
@@ -29,18 +30,18 @@ export default {
             pedirParaCadastrar: null
         }
     },
+
     components: {
         LoginCriar
     },
+
     computed: {
         ...mapState(["dadosUsuario"])
     },
+
     methods: {
         fazerLogin(email, senha) {
-            axios({
-                method: 'GET',
-                url: `http://127.0.0.1:8000/usuario/?email=${email}`
-            })
+            api.get(`usuario/?email=${email}`)
             .then(res => {
                 if (res.data.length == 0) {
                     this.pedirParaCadastrar = true

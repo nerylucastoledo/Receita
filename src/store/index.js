@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+
   state: {
     usuarioLogado: false,
     dadosUsuario: {
@@ -14,25 +15,32 @@ export default new Vuex.Store({
       cidade: ""
     }
   },
+
   mutations: {
     LOGARDESLOGARUSUARIO(state, payload) {
       state.usuarioLogado = payload
     },
+
     INSERIRDADOS(state, payload) {
       state.dadosUsuario.email = payload.email
       state.dadosUsuario.nome = payload.nome
     }
   },
+
   actions: {
+
     logarUsuario(context) {
       context.commit("LOGARDESLOGARUSUARIO", true)
     },
+
     deslogarUsuario(context) {
       context.commit("LOGARDESLOGARUSUARIO", false)
     },
+
     informarUsuario(context, payload) {
       context.commit("INSERIRDADOS", payload)
     },
+
     pegarUsuario(context, payload) {
       fetch(`http://127.0.0.1:8000/usuario/?email=${payload}`)
       .then(req => req.json())
@@ -41,6 +49,7 @@ export default new Vuex.Store({
         context.commit('LOGARDESLOGARUSUARIO', true)
       })
     }
+    
   },
   modules: {
   }

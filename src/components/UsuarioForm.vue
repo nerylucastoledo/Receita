@@ -32,9 +32,10 @@
 </template>
 
 <script>
-import axios from "axios"
+import { api } from "../service.js"
 
 export default {
+    
     data() {
         return {
             usuario: {
@@ -48,6 +49,7 @@ export default {
             }
         }
     },
+
     methods: {
         cadastrarUsuario() {
             const form = new FormData();
@@ -61,14 +63,7 @@ export default {
             form.append("cidade", this.usuario.cidade)
             form.append("foto", file)
 
-            axios({
-                method: 'POST',
-                url: 'http://127.0.0.1:8000/usuario/',
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: form
-            })
+            api.post('usuario/', form)
         }
     }
 }
