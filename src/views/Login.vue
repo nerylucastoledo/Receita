@@ -1,5 +1,5 @@
 <template>
-    <section class="login">
+    <section class="container login">
         <h1>Login</h1>
         <form>
             <label for="emailLogar">E-mail</label>
@@ -66,12 +66,6 @@ export default {
 </script>
 
 <style>
-
-
-.login {
-    max-width: 960px;
-    margin: 0 auto;
-}
 
 .login h1 {
     margin: 20px 0px;

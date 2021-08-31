@@ -1,5 +1,5 @@
 <template>
-    <section id="pagina-inicial">
+    <section class="container" id="pagina-inicial">
         <div class="categoria">
             <h1 class="titulo">Navegue pelas categorias</h1>
             <div>
@@ -120,12 +120,6 @@ export default {
 </script>
 
 <style scoped>
-
-#pagina-inicial {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
 
 .categoria > div {
     display: flex;

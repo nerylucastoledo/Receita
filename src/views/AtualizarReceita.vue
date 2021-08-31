@@ -1,14 +1,14 @@
 <template>
   <section class="cadastrar-receita">
 
-    <form class="adicionar-produto">
+    <form class="adicionar-receita">
       <label for="nome_receita">Nome da Receita</label>
       <input
         type="text"
         name="nome_receita"
         placeholder="Nome da sua receita"
         id="nome_receita"
-        v-model="produto.nome_receita"/>
+        v-model="receita.nome_receita"/>
 
       <label for="serve">Pessoas</label>
       <input
@@ -16,7 +16,7 @@
         name="serve"
         placeholder="Quantidade de pessoas"
         id="serve"
-        v-model="produto.serve"
+        v-model="receita.serve"
       />
 
       <label for="tempo">Tempo</label>
@@ -25,18 +25,18 @@
         name="tempo"
         placeholder="Insira o tempo em minutos"
         id="tempo"
-        v-model="produto.tempo"
+        v-model="receita.tempo"
       />
 
       <label for="dificudlade">Dificuldade</label>
-      <select name="dificuldade" id="dificuldade" v-model="produto.dificuldade">
+      <select name="dificuldade" id="dificuldade" v-model="receita.dificuldade">
         <option value="Fácil">Fácil</option>
         <option value="Médio">Médio</option>
         <option value="Difícil">Difícil</option>
       </select>
 
       <label for="categoria">Categoria</label>
-      <select name="categoria" id="categoria" v-model="produto.categoria">
+      <select name="categoria" id="categoria" v-model="receita.categoria">
         <option value="Pao">Pão</option>
         <option value="Sobremesa">Sobremesa</option>
         <option value="Salgados">Salgados</option>
@@ -51,7 +51,7 @@
         name="descricao"
         id="descricao"
         placeholder="Insira a descrição"
-        v-model="produto.descricao"
+        v-model="receita.descricao"
       />
 
       <label for="ingredientes">Ingredientes</label>
@@ -59,7 +59,7 @@
         name="ingredientes"
         id="ingredientes"
         placeholder='Separe os ingredientes por ","'
-        v-model="produto.ingredientes"
+        v-model="receita.ingredientes"
       ></textarea>
 
       <label for="modo_preparo">Modo de Preparo</label>
@@ -67,7 +67,7 @@
         name="modo_preparo"
         id="modo_preparo"
         placeholder='Separe os passos por ";"'
-        v-model="produto.modo_preparo"
+        v-model="receita.modo_preparo"
       ></textarea>
 
       <label for="imagem">Imagem</label>
@@ -77,7 +77,7 @@
         class="btn cadastrar"
         type="submit"
         value="Atualizar Receita"
-        @click.prevent="atualizarReceita(produto)"
+        @click.prevent="atualizarReceita"
       />
     </form>
 
@@ -99,6 +99,7 @@
 <script>
 import { api } from "../service.js";
 import ModalSucesso from "../components/ModalSucesso.vue"
+import { formatarReceita } from '../helpers.js'
 
 export default {
   props: ["id"],
@@ -109,7 +110,7 @@ export default {
 
   data() {
     return {
-      produto: {
+      receita: {
         nome_receita: "",
         serve: "",
         tempo: "",
@@ -128,29 +129,15 @@ export default {
   methods: {
     editarReceita() {
       api.get(`receita/${this.id}`).then((res) => {
-        this.produto = res.data;
+        this.receita = res.data;
       });
     },
 
     atualizarReceita() {
-      const form = new FormData();
       const file = this.$refs.imagem.files[0];
+      const formatada = formatarReceita(this.receita, file)
 
-      form.append("id_receita", this.produto.id_receita);
-      form.append("nome_receita", this.produto.nome_receita);
-      form.append("serve", this.produto.serve);
-      form.append("tempo", this.produto.tempo);
-      form.append("dificuldade", this.produto.dificuldade);
-      form.append("ingredientes", this.produto.ingredientes);
-      form.append("descricao", this.produto.descricao);
-      form.append("modo_preparo", this.produto.modo_preparo);
-      form.append("nome_criador", this.$store.state.dadosUsuario.nome);
-      form.append("email_criador", this.$store.state.dadosUsuario.email);
-      form.append("categoria", this.produto.categoria);
-      form.append("imagem", file);
-
-      api
-        .put(`receita/${this.id}/`, form)
+      api.put(`receita/${this.id}/`, formatada)
         .then((res) => {
           if (res.status === 200) {
             this.modal = true;
@@ -169,9 +156,9 @@ export default {
         });
     },
 
-    deletarReceita() {
-      if (confirm("Deletar " + this.produto.nome_receita + "?")) {
-        api.delete(`receita/${this.id}/`);
+    async deletarReceita() {
+      if (confirm("Deletar " + this.receita.nome_receita + "?")) {
+        await api.delete(`receita/${this.id}/`);
         this.$router.push("minhas-receitas");
       }
     },

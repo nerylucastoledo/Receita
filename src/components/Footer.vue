@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <div>
+        <div class="container">
             <div class="receber-novidades">
                 <h3>Receba nossas novidades</h3>
                 <div class="email">
@@ -36,6 +36,7 @@ footer {
     padding: 20px 0px 40px;
     margin-top: 60px;
     position: relative;
+    top: 0px;
 }
 
 footer h3 {
@@ -45,8 +46,6 @@ footer h3 {
 
 footer > div {
     display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -57,19 +56,13 @@ footer img {
 }
 
 .redes-sociais img {
-    width: 30px;
+    width: 40px;
     margin: 0px 10px;
 }
 
 .receber-novidades input {
-    max-width: 250px;
-    display: block;
     margin: 0px;
     border-radius: 50px;
-}
-
-.receber-novidades input::-webkit-input-placeholder {
-    font-size: 16px;
 }
 
 .email {
@@ -81,13 +74,11 @@ footer img {
     margin-left: 10px;
 }
 
-@media (max-width: 510px) {
-    .redes-sociais {
-        margin-top: 40px;
-    }
-    .receber-novidades {
-        padding: 0px 10px;
-    }
+
+@media (max-width: 583px) {
+  .redes-sociais {
+    margin-top: 40px;
+  }
 }
 
 </style>

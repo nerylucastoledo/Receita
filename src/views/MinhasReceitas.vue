@@ -1,5 +1,5 @@
 <template>
-  <section id="minhas-receitas">
+  <section class="container">
     <h1 class="titulo">Suas Receitas</h1>
     <div class="receitas" v-if="minhasReceitas.length > 0">
       <div v-for="(receita, index) in minhasReceitas" :key="receita + index">
@@ -37,10 +37,9 @@ export default {
   },
 
   methods: {
-    pegarMeusProdutos() {
+    pegarMinhasReceitas() {
       if (this.$store.state.dadosUsuario.email) {
-        api
-          .get(`receita/?email_criador=${this.$store.state.dadosUsuario.email}`)
+        api.get(`receita/?email_criador=${this.$store.state.dadosUsuario.email}`)
           .then((res) => {
             this.minhasReceitas = res.data;
           });
@@ -49,16 +48,12 @@ export default {
   },
 
   created() {
-    this.pegarMeusProdutos();
+    this.pegarMinhasReceitas();
   },
 };
 </script>
 
 <style scoped>
-#minhas-receitas {
-  max-width: 980px;
-  margin: 0 auto;
-}
 
 .receitas p {
   margin-top: 10px;

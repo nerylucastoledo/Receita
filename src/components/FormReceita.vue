@@ -1,5 +1,5 @@
 <template>
-    <section class="cadastrar-receita">
+    <section class="">
         <form class="adicionar-produto">
             <label for="nome_receita">Nome da Receita</label>
             <input type="text" name="nome_receita" placeholder='Nome da sua receita' id="nome_receita" v-model="receita.nome_receita" />
@@ -42,25 +42,11 @@
 
             <input class="btn cadastrar" type="submit" value="Adicionar Receita" @click.prevent="cadastrarReceita" />
         </form>
-        <div v-if="modal">
-            <ModalSucesso>
-                <p>Receita cadastrada com sucesso!</p>
-            </ModalSucesso>
-        </div>
-    </section>    
+    </section>
 </template>
 
 <script>
-import { api } from '../service.js'
-import ModalSucesso from "../components/ModalSucesso.vue"
-import { formatarReceita } from '../helpers.js'
-
 export default {
-
-    components: {
-        ModalSucesso
-    },
-    
     data() {
         return {
             receita: {
@@ -77,38 +63,23 @@ export default {
             modal: false,
         }
     },
-
-    methods: {
-        cadastrarReceita() {
-            const file = this.$refs.imagem.files[0];
-            const formatada = formatarReceita(this.receita, file)
-
-            api.post('receita/', formatada)
-            .then(res => {
-                if (res.status === 201) {
-                    this.modal = true;
-                    setTimeout(() => {
-                        this.modal = false;
-                        this.$router.push("minhas-receitas");
-                    }, 1000);
-                }
-            }).catch(error => {
-                if(error) {
-                    alert('Não foi possivel cadastrar! Tente novamente')
-                }
-            })
-        }
-    }
 }
 </script>
 
-<style scoped>
+<style>
 
 .cadastrar-receita {
-    margin-top: 40px;
+  padding: 0px 30px;
 }
 
-::placeholder {
-    font-size: 14px;
+.cadastrar-receita p {
+  text-align: center;
 }
+
+.cadastrar-receita .btn {
+  display: block;
+  margin: 20px auto;
+  width: 300px;
+}
+
 </style>

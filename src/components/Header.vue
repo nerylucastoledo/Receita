@@ -1,6 +1,6 @@
 <template>
     <section id="header">
-        <nav id="menu">
+        <nav id="menu" class="container">
             <div>
                 <router-link to="/"><img id="img" src="../assets/logo.png" alt="Logo da empresa"></router-link>
             </div>
@@ -48,8 +48,6 @@ export default {
 
 #menu {
     padding: 10px 0px;
-    margin: 0 auto;
-    max-width: 1200px;
     align-items: center;
     display: flex;
     justify-content: space-around;

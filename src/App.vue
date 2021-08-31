@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <main id="main">
+      <router-view />
+    </main>
     <Footer />
   </div>
 </template>
@@ -25,6 +27,18 @@ export default {
 </script>
 
 <style>
+
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#main {
+  flex: 1;
+}
+
+
 label,
 textarea {
   margin-bottom: 5px;
@@ -80,6 +94,26 @@ body {
   font-family: cursive;
 }
 
+.btn {
+  padding: 10px 30px;
+    background: #759F41;
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgb(30 60 90 / 20%);
+    transition: all .3s;
+    border: none;
+    font-family: cursive;
+    cursor: pointer;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 2rem;
+  margin: 60px 0px;
+}
+
 .receitas {
   margin-top: 40px;
   display: grid;
@@ -120,7 +154,14 @@ body {
   color: #000;
 }
 
-@media (max-width: 759px) {
+.container {
+  max-width: 1100px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 30px;
+}
+
+@media (max-width: 835px) {
   .logo-footer {
     margin-top: 40px;
   }

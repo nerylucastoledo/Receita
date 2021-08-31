@@ -1,5 +1,5 @@
 <template>
-    <section class="produto">
+    <section class="container produto">
         <div v-if="pessoa" class="pessoa">
             <div v-if="pessoa.foto">
                 <img class="foto-pessoa" :src="pessoa.foto" alt="">
@@ -21,18 +21,22 @@
 
             <div class="infos-produto">
                 <div class="items">
-                    <h2>Convidados</h2>
+                    <font-awesome-icon icon="users"/>
+                    <h2>Pessoas</h2>
                     <p>{{produto.serve}}</p>
                 </div>
                 <div class="items">
+                    <font-awesome-icon icon="clock"/>
                     <h2>Tempo</h2>
                     <p>{{produto.tempo}} min</p>
                 </div>
                 <div class="items">
+                    <font-awesome-icon icon="utensils"/>
                     <h2>Categoria</h2>
                     <p>{{produto.categoria}}</p>
                 </div>
                 <div class="items">
+                    <font-awesome-icon icon="tools"/>
                     <h2>Dificuldade</h2>
                     <p>{{produto.dificuldade}}</p>
                 </div>
@@ -54,7 +58,9 @@
             </div>
         </div>
 
-        <Disqus ref="disqus"/>
+        <div class="disqus">
+            <Disqus ref="disqus"/>
+        </div>
 
     </section>
 </template>
@@ -106,9 +112,7 @@ export default {
 <style scoped>
 
 .produto {
-    max-width: 900px;
-    margin: 60px auto 0;
-    padding: 0 60px;
+    margin-top: 60px;
 }
 
 .pessoa {
@@ -172,7 +176,7 @@ export default {
 
 .items p {
     font-size: 1rem;
-    color: #727B7A;
+    color: #000;
     margin-top: 10px;
 }
 
@@ -194,7 +198,7 @@ export default {
     box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
     padding: 5px;
     border-radius: 4px;
-    color: #727B7A;
+    color: #000;
     max-width: 50%;
 }
 
@@ -216,6 +220,10 @@ input {
     margin-top: 20px;
 }
 
+.infos-produto h2 {
+    font-size: 18px;
+}
+
 @media (max-width: 750px) {
     .introducao-produto {
         display: block;
@@ -234,5 +242,9 @@ input {
     .items {
         width: 100%;
     }
+}
+
+.disqus {
+    margin-top: 60px;
 }
 </style>
