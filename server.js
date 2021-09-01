@@ -1,18 +1,10 @@
-const express = require('express');
-const serveStatic = require('serve-static')
-const path = require('path')
+var express = require('express')
+var path = require('path')
+var serveStatic = require('serve-static')
 
-const app = express();
+var app = express()
+app.use(serveStatic(path.join(__dirname, 'dist')))
 
-app.use('/', serveStatic(path.join(__dirname, '/dist')))
-
-const port = process.env.PORT || 8080
+var port = process.env.PORT || 5000
 app.listen(port)
-
-console.log('Listad na porta: ' + port)
-
-const http = require('http')
-const fs = require('fs')
-const httpPort = 80
-
-console.log('Listado na porta: ' + port)
+console.log('server started ' + port)
