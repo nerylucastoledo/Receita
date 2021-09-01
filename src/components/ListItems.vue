@@ -52,7 +52,7 @@
         </div>
         
         <div v-if="carregou == 0">
-            <p>Carregando...</p>
+            <PageLoading/>
         </div>
         <div v-else>
 
@@ -81,13 +81,15 @@ import {serialize} from "../helpers.js"
 
 import ProdutoBuscar from "../components/ProdutoBuscar.vue"
 import Paginar from "../components/Paginar.vue"
+import PageLoading from "../components/PageLoading.vue"
 
 export default {
     name: "ListItems",
     
     components: {
         ProdutoBuscar,
-        Paginar
+        Paginar,
+        PageLoading
     },
 
     data() {
@@ -105,7 +107,9 @@ export default {
             .then(res => {
                 this.quantidadeDeReceita = res.data.count
                 this.receitas = res.data.results
-                this.carregou = 1
+                setTimeout(() => {
+                    this.carregou = 1
+                }, 500);
             })
         },
 
@@ -148,7 +152,7 @@ export default {
 .categoria-items {
     width: 95px;
     height: 95px;
-    background-color: #ffc800;
+    background-color: #FDAE89;
     border-radius: 50%;
     padding: 20px 0px;
 }

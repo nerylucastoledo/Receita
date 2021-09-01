@@ -3,18 +3,26 @@
 
     <h1 class="titulo">Suas Receitas</h1>
 
-    <div class="receitas" v-if="minhasReceitas.length > 0">
-
-      <div v-for="(receita, index) in minhasReceitas" :key="receita + index">
-        <router-link :to="{name: 'atualizar-receita', params: { id: receita.id_receita }}">
-          <img :src="receita.imagem" alt="" />
-          <p>{{ receita.nome_receita }}</p>
-        </router-link>
-      </div>
-      
+    <div v-if="carregou == 0">
+      <PageLoading/>
     </div>
 
-    <p class="nada-encontrado" v-else>Nenhum receita encontrada! :(</p>
+    <div v-else>
+      <div class="receitas" v-if="minhasReceitas.length > 0">
+
+        <div v-for="(receita, index) in minhasReceitas" :key="receita + index">
+          <router-link :to="{name: 'atualizar-receita', params: { id: receita.id_receita }}">
+            <img :src="receita.imagem" alt="" />
+            <p>{{ receita.nome_receita }}</p>
+          </router-link>
+        </div>
+        
+      </div>
+
+        <p class="nada-encontrado" v-else>Nenhum receita encontrada! :(</p>
+
+    </div>
+
 
     <Paginar :quantidadeDeReceita="quantidadeDeReceita"></Paginar>
     
@@ -28,17 +36,20 @@ import { api } from "../service.js";
 import {serialize} from "../helpers.js"
 
 import Paginar from "../components/Paginar.vue"
+import PageLoading from "../components/PageLoading.vue"
 
 export default {
   name: "MinhasReceitas",
 
   components: {
-    Paginar
+    Paginar,
+    PageLoading
   },
 
   data() {
     return {
       minhasReceitas: "",
+      carregou: 0,
       quantidadeDeReceita: 1,
     };
   },
@@ -50,6 +61,9 @@ export default {
           .then((res) => {
             this.quantidadeDeReceita = res.data.count
             this.minhasReceitas = res.data.results;
+            setTimeout(() => {
+              this.carregou = 1
+            }, 500);
           });
       }
     },
@@ -83,7 +97,7 @@ export default {
 <style scoped>
 
 .receitas p {
-  margin-top: 0px;
+  margin-top: 5px;
 }
 
 .nada-encontrado {

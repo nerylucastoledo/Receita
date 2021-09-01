@@ -133,6 +133,13 @@ body {
   border-radius: 10px;
 }
 
+.receitas img:hover{
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  transform: scale(1.1)
+}
+
 .receitas span {
   position: relative;
   bottom: 28px;
