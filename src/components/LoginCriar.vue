@@ -1,81 +1,45 @@
 <template>
     <section>
+
         <h1 class="titulo">Crie sua conta</h1>
-        <button v-if="!mostrar" @click="mostrar = true" class="btn cadastrar">Criar conta</button>
+
+        <div>
+            <button v-if="!mostrar" @click="mostrar = true" class="btn cadastrar">Criar conta</button>
+        </div>
+
         <form v-if="mostrar">
-            <div class="usuario">
-                <label for="nome">Nome</label>
-                <input
-                type="text"
-                name="nome"
-                id="nome"
-                v-model="usuario.nome"
-                placeholder="Nome"
-                />
 
-                <label for="email">E-mail</label>
-                <input
-                type="text"
-                id="email"
-                name="email"
-                v-model="usuario.email"
-                placeholder="Digite seu e-mail"
-                />
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" v-model="usuario.nome" placeholder="Nome"/>
 
-                <label for="senha">Senha</label>
-                <input
-                type="password"
-                name="senha"
-                id="senha"
-                v-model="usuario.senha"
-                placeholder="Senha"
-                />
-            </div>
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" v-model="usuario.email" placeholder="Digite seu e-mail"/>
+
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" v-model="usuario.senha" placeholder="Senha"/>
 
             <label for="sobrenome">Sobrenome</label>
-            <input
-                type="text"
-                name="sobrenome"
-                id="sobrenome"
-                v-model="usuario.sobrenome"
-                placeholder="Sobrenome"
-            />
+            <input type="text" name="sobrenome" id="sobrenome" v-model="usuario.sobrenome" placeholder="Sobrenome"/>
 
             <label for="Estado">Estado</label>
-            <input
-                type="text"
-                name="estado"
-                id="estado"
-                v-model="usuario.estado"
-                placeholder="Estado"
-            />
+            <input type="text" name="estado" id="estado" v-model="usuario.estado" placeholder="Estado"/>
 
             <label for="cidade">Cidade</label>
-            <input
-                type="text"
-                name="cidade"
-                id="cidade"
-                v-model="usuario.cidade"
-                placeholder="Cidade"
-            />
+            <input type="text" name="cidade" id="cidade" v-model="usuario.cidade" placeholder="Cidade"/>
 
             <label for="foto">Foto</label>
             <input type="file" name="foto" id="foto" multiple ref="foto" />
 
-            <div class="button">
-                <button
-                @click.prevent="cadastrarUsuario"
-                class="btn btn-form cadastrar"
-                >
-                Cadastrar
-                </button>
-            </div>
+            <button @click.prevent="cadastrarUsuario" class="btn btn-form cadastrar">Cadastrar</button>
+
             <div v-if="modal">
                 <ModalSucesso>
                     <p>Usuário criado com sucesso!</p>
                 </ModalSucesso>
             </div>
+
         </form>
+
     </section>
 </template>
 
@@ -91,17 +55,17 @@ export default {
 
     data() {
         return {
-        usuario: {
-            nome: "",
-            email: "",
-            senha: "",
-            sobrenome: "",
-            estado: "",
-            cidade: "",
-            foto: null,
-        },
-        mostrar: false,
-        modal: false,
+            usuario: {
+                nome: "",
+                email: "",
+                senha: "",
+                sobrenome: "",
+                estado: "",
+                cidade: "",
+                foto: null,
+            },
+            mostrar: false,
+            modal: false,
         };
     },
 
@@ -137,8 +101,3 @@ export default {
     },
 };
 </script>
-
-
-<style scoped>
-
-</style>

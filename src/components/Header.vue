@@ -1,19 +1,29 @@
 <template>
     <section id="header">
-        <nav id="menu" class="container">
+
+        <div id="menu" class="container">
+
             <div>
-                <router-link to="/"><img id="img" src="../assets/logo.png" alt="Logo da empresa"></router-link>
+                <router-link to="/">
+                    <img id="img" src="../assets/logo.png" alt="Logo da empresa">
+                </router-link>
             </div>
-            <ul>
-                <li><router-link to="/">Receitas</router-link></li>
-                <li><router-link to="/minhas-receitas">Minhas Receitas</router-link></li>
-            </ul>
+
+            <nav>
+                <ul>
+                    <li><router-link to="/">Receitas</router-link></li>
+                    <li><router-link to="/minhas-receitas">Minhas Receitas</router-link></li>
+                </ul>
+            </nav>
+
             <div class="entrar-header">
                 <img v-if="!$store.state.usuarioLogado" src="../assets/icon-pessoa.png" alt="">
                 <button v-if="$store.state.usuarioLogado" @click="deslogarUsuario" class="btn deslogar">Sair</button>
                 <router-link v-else to="/login"><button class="btn">Login</button></router-link>
             </div>
-        </nav>
+
+        </div>
+
     </section>
 </template>
 
@@ -105,6 +115,10 @@ export default {
 
 .entrar-header span {
     margin-right: 15px;
+}
+
+#menu ul li a.router-link-exact-active {
+    color: #FC834B;
 }
 
 @media (max-width: 620px) {

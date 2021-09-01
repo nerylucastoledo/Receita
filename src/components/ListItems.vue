@@ -1,8 +1,12 @@
 <template>
     <section class="container" id="pagina-inicial">
+
         <div class="categoria">
+
             <h1 class="titulo">Navegue pelas categorias</h1>
+
             <div>
+
                 <div class="categoria-items" @click="filtroCategoria('Pao')">
                     <img src="../assets/paes.png" alt="">
                     <p>Pães</p>
@@ -37,17 +41,21 @@
                     <img src="../assets/aves.png" alt="">
                     <p>Aves</p>
                 </div>
+                
             </div>
             
         </div>
+
         <div>
             <h1 class="titulo">Todas as receitas</h1>
             <ProdutoBuscar/>
         </div>
+        
         <div v-if="carregou == 0">
             <p>Carregando...</p>
         </div>
         <div v-else>
+
             <div class="receitas" v-if="receitas.length > 0">
                 <div v-for="(receita, index) in receitas" :key="receita + index">
                     <router-link :to="{name: 'produto', params: {id: receita.id_receita}}">
@@ -57,27 +65,36 @@
                     </router-link>
                 </div>
             </div>
+
             <p class="nenhum-encontrada" v-else>Nenhum receita encontrada! :(</p>
+            
         </div>
+
+        <Paginar :quantidadeDeReceita="quantidadeDeReceita"></Paginar>
+
     </section>
 </template>
 
 <script>
 import { api } from '../service.js'
-import ProdutoBuscar from "../components/ProdutoBuscar.vue"
 import {serialize} from "../helpers.js"
+
+import ProdutoBuscar from "../components/ProdutoBuscar.vue"
+import Paginar from "../components/Paginar.vue"
 
 export default {
     name: "ListItems",
     
     components: {
-        ProdutoBuscar
+        ProdutoBuscar,
+        Paginar
     },
 
     data() {
         return {
             receitas: null,
-            carregou: 0 
+            carregou: 0,
+            quantidadeDeReceita: 1
         }
     },
 
@@ -86,7 +103,8 @@ export default {
         async buscarReceitas() {
             api.get(this.url)
             .then(res => {
-                this.receitas = res.data
+                this.quantidadeDeReceita = res.data.count
+                this.receitas = res.data.results
                 this.carregou = 1
             })
         },

@@ -1,5 +1,6 @@
 <template>
     <section class="container produto">
+        
         <div v-if="pessoa" class="pessoa">
             <div v-if="pessoa.foto">
                 <img class="foto-pessoa" :src="pessoa.foto" alt="">
@@ -11,6 +12,7 @@
         </div>
 
         <div v-if="produto">
+
             <div class="introducao-produto">
                 <img :src="produto.imagem" alt="">
                 <div>
@@ -20,6 +22,7 @@
             </div>
 
             <div class="infos-produto">
+                
                 <div class="items">
                     <font-awesome-icon icon="users"/>
                     <h2>Pessoas</h2>
@@ -40,22 +43,30 @@
                     <h2>Dificuldade</h2>
                     <p>{{produto.dificuldade}}</p>
                 </div>
+
             </div>
 
             <div class="ingredientes items">
+
                 <h2>Ingredientes</h2>
+
                 <div v-for="(ingredientes, index) in produto.ingredientes" :key="ingredientes+index">
                     <input type="checkbox">
                     <label for="">{{ingredientes}}</label>
                 </div>
+
             </div>
 
             <div class="modo-preparo items">
+
                 <h2>Modo de preparo</h2>
+
                 <div v-for="(passo, index) in produto.modo_preparo" :key="passo+index">
                     <p>{{index + 1}} - {{passo}}</p>
                 </div>
+
             </div>
+
         </div>
 
         <div class="disqus">
@@ -84,12 +95,12 @@ export default {
         mostrarProdutoSelecionado() {
             api.get(`receita/?id=${this.id}`)
             .then(res => {
-                const ingredientes = res.data[0].ingredientes.split(",")
-                const modo_preparo = res.data[0].modo_preparo.split(";")
-                this.produto = res.data[0]
+                const ingredientes = res.data.results[0].ingredientes.split(",")
+                const modo_preparo = res.data.results[0].modo_preparo.split(";")
+                this.produto = res.data.results[0]
                 this.produto.ingredientes = ingredientes
                 this.produto.modo_preparo = modo_preparo
-                this.mostrarPessoaQueCriou(res.data[0].email_criador)
+                this.mostrarPessoaQueCriou(res.data.results[0].email_criador)
             })
         },
 

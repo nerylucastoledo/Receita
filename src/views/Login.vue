@@ -1,17 +1,25 @@
 <template>
     <section class="container login">
+
         <h1>Login</h1>
+
         <form>
+
             <label for="emailLogar">E-mail</label>
             <input type="email" name="emailLogar" id="emailLogar" v-model="emailLogar" placeholder="E-mail" required>
 
             <label for="senha">Senha</label>
             <input type="password" autocomplete="on" name="senha" id="senha" v-model="senha" placeholder="Senha" required>
+            
             <p class="login_incorreto" v-if="senhaIncorreta">E-mail ou senha incorretos!</p>
             <p class="pedirParaCadastrar" v-if="pedirParaCadastrar">E-mail não encontrado! Crie uma conta</p>
+            
             <input type="submit" @click.prevent="fazerLogin(emailLogar, senha)" class="btn cadastrar" value="Entrar">
+        
         </form>
+
         <LoginCriar/>
+
     </section>
 </template>
 

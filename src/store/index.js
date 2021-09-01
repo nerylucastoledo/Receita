@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
   state: {
+    receitasPorPagina: 9,
     usuarioLogado: false,
     dadosUsuario: {
       nome: "",

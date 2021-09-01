@@ -2,31 +2,15 @@
   <section class="cadastrar-receita">
 
     <form class="adicionar-receita">
+      
       <label for="nome_receita">Nome da Receita</label>
-      <input
-        type="text"
-        name="nome_receita"
-        placeholder="Nome da sua receita"
-        id="nome_receita"
-        v-model="receita.nome_receita"/>
+      <input type="text" name="nome_receita" placeholder="Nome da sua receita" id="nome_receita" v-model="receita.nome_receita"/>
 
       <label for="serve">Pessoas</label>
-      <input
-        type="number"
-        name="serve"
-        placeholder="Quantidade de pessoas"
-        id="serve"
-        v-model="receita.serve"
-      />
+      <input type="number" name="serve" placeholder="Quantidade de pessoas" id="serve" v-model="receita.serve"/>
 
       <label for="tempo">Tempo</label>
-      <input
-        type="number"
-        name="tempo"
-        placeholder="Insira o tempo em minutos"
-        id="tempo"
-        v-model="receita.tempo"
-      />
+      <input type="number" name="tempo" placeholder="Insira o tempo em minutos" id="tempo" v-model="receita.tempo"/>
 
       <label for="dificudlade">Dificuldade</label>
       <select name="dificuldade" id="dificuldade" v-model="receita.dificuldade">
@@ -47,38 +31,19 @@
       </select>
 
       <label for="descricao">Descrição</label>
-      <input
-        name="descricao"
-        id="descricao"
-        placeholder="Insira a descrição"
-        v-model="receita.descricao"
-      />
+      <input name="descricao" id="descricao" placeholder="Insira a descrição" v-model="receita.descricao"/>
 
       <label for="ingredientes">Ingredientes</label>
-      <textarea
-        name="ingredientes"
-        id="ingredientes"
-        placeholder='Separe os ingredientes por ","'
-        v-model="receita.ingredientes"
-      ></textarea>
+      <textarea name="ingredientes" id="ingredientes" placeholder='Separe os ingredientes por ","' v-model="receita.ingredientes"></textarea>
 
       <label for="modo_preparo">Modo de Preparo</label>
-      <textarea
-        name="modo_preparo"
-        id="modo_preparo"
-        placeholder='Separe os passos por ";"'
-        v-model="receita.modo_preparo"
-      ></textarea>
+      <textarea name="modo_preparo" id="modo_preparo" placeholder='Separe os passos por ";"' v-model="receita.modo_preparo"></textarea>
 
       <label for="imagem">Imagem</label>
       <input type="file" name="imagem" id="imagem" multiple ref="imagem" />
 
-      <input
-        class="btn cadastrar"
-        type="submit"
-        value="Atualizar Receita"
-        @click.prevent="atualizarReceita"
-      />
+      <input class="btn cadastrar" type="submit" value="Atualizar Receita" @click.prevent="atualizarReceita"/>
+    
     </form>
 
     <div v-if="modal">

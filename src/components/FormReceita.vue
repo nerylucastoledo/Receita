@@ -1,6 +1,8 @@
 <template>
     <section class="">
+
         <form class="adicionar-produto">
+
             <label for="nome_receita">Nome da Receita</label>
             <input type="text" name="nome_receita" placeholder='Nome da sua receita' id="nome_receita" v-model="receita.nome_receita" />
 
@@ -41,7 +43,9 @@
             <input type="file" name="imagem" id="imagem" multiple ref="imagem" />
 
             <input class="btn cadastrar" type="submit" value="Adicionar Receita" @click.prevent="cadastrarReceita" />
+        
         </form>
+
     </section>
 </template>
 

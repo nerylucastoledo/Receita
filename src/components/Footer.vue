@@ -1,25 +1,37 @@
 <template>
     <footer>
+
         <div class="container">
+
             <div class="receber-novidades">
+
                 <h3>Receba nossas novidades</h3>
+
                 <div class="email">
                     <input type="email" name="email" id="email" placeholder="Digite seu e-mail">
                     <button class="btn">Enviar</button>
                 </div>
+                
             </div>
+
             <div class="redes-sociais">
+
                 <h3>Redes Sociais</h3>
+
                 <div>
                     <img src="../assets/facebook.png" alt="Logo Facebook">
                     <img src="../assets/instagram.png" alt="Logo Instragam">
                     <img src="../assets/twitter.png" alt="Logo Twitter">
                 </div>
+                
             </div>
+
             <div class="logo-footer">
                 <img src="../assets/logo.png" alt="">
             </div>
+
         </div>
+
     </footer>
 </template>
 
