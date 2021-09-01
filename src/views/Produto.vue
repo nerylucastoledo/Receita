@@ -135,6 +135,7 @@ export default {
     width: 80px;
     height: 80px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .info-pessoa {
@@ -152,8 +153,9 @@ export default {
 }
 
 .introducao-produto img {
-    max-width: 450px;
-    max-height: 300px;
+    width: 600px;
+    max-height: 400px;
+    object-fit: cover;
 }
 
 .introducao-produto p, .introducao-produto h1 {

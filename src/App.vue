@@ -127,12 +127,10 @@ body {
 }
 
 .receitas img {
-  max-width: 100%;
-  height: 70%;
-  display: block;
-  margin: 0 auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .receitas span {
@@ -150,8 +148,10 @@ body {
 
 .receitas p {
   text-align: center;
-  margin-top: -20px;
   color: #000;
+  font-size: 18px;
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
 
 .container {

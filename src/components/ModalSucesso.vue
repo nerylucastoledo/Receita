@@ -20,7 +20,7 @@
   z-index: 1;
   opacity:1;
   pointer-events: none;
-  color: #fff;
+  color: #13ac13;
 }
 
 .modal > div {
@@ -29,7 +29,7 @@
   position: relative;
   margin: 10% auto;
   padding: 15px 20px;
-  background: #008000;
+  background: #a9eca9;
 }
 
 </style>

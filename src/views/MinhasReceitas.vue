@@ -83,7 +83,7 @@ export default {
 <style scoped>
 
 .receitas p {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .nada-encontrado {

@@ -43,7 +43,7 @@ export default new Vuex.Store({
     },
 
     pegarUsuario(context, payload) {
-      fetch(`http://127.0.0.1:8000/usuario/?email=${payload}`)
+      fetch(`https://rest-api-receita.herokuapp.com/usuario/?email=${payload}`)
       .then(req => req.json())
       .then(res => {
         context.commit('INSERIRDADOS', res[0])

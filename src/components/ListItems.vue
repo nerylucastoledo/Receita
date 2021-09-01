@@ -121,7 +121,7 @@ export default {
     computed: {
         url() {
             const query = serialize(this.$route.query)
-            return `http://127.0.0.1:8000/receita/${query}`
+            return `https://rest-api-receita.herokuapp.com/receita/${query}`
         }
     },
 
