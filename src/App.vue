@@ -190,5 +190,9 @@ a {
   .receitas span {
     font-size: 14px;
   }
+
+  form {
+    max-width: 100% !important;
+  }
 }
 </style>
