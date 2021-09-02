@@ -3,6 +3,7 @@
   <div class="produtosbuscar">
     <form>
       <input type="text" name="busca" id="busca" v-model="busca" @keyup="buscarProdutos" placeholder="Buscar..."/>
+      <input class="btn" type="submit" value="Enviar" @click.prevent="buscarProdutos">
     </form>
   </div>
 </template>
@@ -28,9 +29,10 @@ export default {
 
 <style scoped>
   form {
-    max-width: 400px;
+    max-width: 50%;
     margin: 30px auto 60px auto;
     position: relative;
+    display: flex;
   }
 
   #busca {
@@ -44,16 +46,18 @@ export default {
     transform: scale(1.1);
   }
 
-  #lupa {
+  .btn {
     width: 62px;
     height: 62px;
-    background: url("../assets/pesquisar.png") no-repeat center center;
+    background: url('../assets/lupa.svg') no-repeat 50%;
     text-indent: -150px;
     border: none;
     cursor: pointer;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     box-shadow: none;
   }
+
+
 </style>

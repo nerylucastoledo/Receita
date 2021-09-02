@@ -5,7 +5,7 @@
 
             <div>
                 <router-link to="/">
-                    <img id="img" src="../assets/logo.png" alt="Logo da empresa">
+                    <img id="logo" src="../assets/logo.png" alt="Logo da empresa">
                 </router-link>
             </div>
 
@@ -125,7 +125,7 @@ export default {
     #menu {
         display: block;
     }
-    #menu img {
+    #menu #logo {
         display: block;
         margin: 0 auto;
     }
@@ -135,7 +135,8 @@ export default {
         margin-bottom: 20px;
     }
     .entrar-header {
-        display: none;
+        display: flex;
+        justify-content: center;
     }
 }   
 

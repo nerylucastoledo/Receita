@@ -69,7 +69,7 @@ textarea:hover {
 
 * {
   box-sizing: border-box;
-  font-family: cursive;
+  font-family: apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
 }
 
 body,
@@ -90,10 +90,6 @@ a {
   text-decoration: none;
 }
 
-body {
-  font-family: cursive;
-}
-
 .btn {
   padding: 10px 30px;
     background: #759F41;
@@ -104,7 +100,7 @@ body {
     box-shadow: 0 4px 8px rgb(30 60 90 / 20%);
     transition: all .3s;
     border: none;
-    font-family: cursive;
+    font-family: apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
     cursor: pointer;
 }
 
