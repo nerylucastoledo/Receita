@@ -1,8 +1,10 @@
 # Website de Receitas
 
+
 ## Um website aonde você pode conferir as melhores receitas cadastradas pelas pessoas.
 
-### O que o site é capaz de fazer :hushed:
+
+### O que o site é capaz de fazer :gear:
 
 - Criar um usuário novo.
 - Fazer login com um usuário existente.
@@ -14,11 +16,14 @@
 - Pesquisar uma receita qualquer.
 - Navegação por página.
 - Fazer comentario em uma receita com o disqus
+- 
 
 > Status do Projeto: Em processo de finalização :warning:
+> 
 
 ## Deploy da Aplicação com Heroku / Aws: :dash:
 > http://receitas-lucas.herokuapp.com/
+> 
 
 ## Como rodar a aplicação na sua máquina :rocket:
 No terminal clone o projeto
