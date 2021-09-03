@@ -20,7 +20,7 @@
 > Status do Projeto: Em processo de finalização :warning:
 
 ## Deploy da Aplicação com Heroku / Aws: :dash:
-> 
+> http://receitas-lucas.herokuapp.com/
 
 ## Como rodar a aplicação na sua máquina :rocket:
 No terminal clone o projeto
