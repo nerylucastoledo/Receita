@@ -15,7 +15,7 @@
 - Filtrar receitas por categoria.
 - Pesquisar uma receita qualquer.
 - Navegação por página.
-- Fazer comentario em uma receita com o disqus
+- Fazer comentario em uma receita com o disqus.
 
 > Status do Projeto: Em processo de finalização :warning:
 
