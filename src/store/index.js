@@ -30,8 +30,10 @@ export default new Vuex.Store({
 
   actions: {
 
-    logarUsuario(context) {
+    logarUsuario(context, payload) {
       context.commit("LOGARDESLOGARUSUARIO", true)
+      localStorage.setItem("email", payload.email)
+      localStorage.setItem("senha", payload.senha)
     },
 
     deslogarUsuario(context) {

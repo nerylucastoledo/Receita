@@ -59,12 +59,19 @@ export default {
       if (this.$store.state.dadosUsuario.email) {
         api.get(this.url)
           .then((res) => {
+
             this.quantidadeDeReceita = res.data.count
             this.minhasReceitas = res.data.results;
+
             setTimeout(() => {
               this.carregou = 1
             }, 500);
+
           });
+      } else {
+        setTimeout(() => {
+          this.carregou = 1
+        }, 500);
       }
     },
   },
@@ -104,6 +111,7 @@ export default {
   text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
+  font-size: 22px;
 }
 
 .cadastrar {

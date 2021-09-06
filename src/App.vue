@@ -92,16 +92,16 @@ a {
 
 .btn {
   padding: 10px 30px;
-    background: #759F41;
-    border-radius: 4px;
-    color: #fff;
-    text-align: center;
-    font-size: 1rem;
-    box-shadow: 0 4px 8px rgb(30 60 90 / 20%);
-    transition: all .3s;
-    border: none;
-    font-family: apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
-    cursor: pointer;
+  background: #759F41;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgb(30 60 90 / 20%);
+  transition: all .3s;
+  border: none;
+  font-family: apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  cursor: pointer;
 }
 
 .titulo {
@@ -193,6 +193,17 @@ a {
 
   form {
     max-width: 100% !important;
+  }
+}
+
+@media (max-width: 490px) {
+  .receitas {
+    display: block;
+    margin: 30px 0 0;
+  }
+
+  .receitas div {
+    margin-bottom: 60px;
   }
 }
 </style>

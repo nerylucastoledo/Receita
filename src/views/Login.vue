@@ -1,22 +1,28 @@
 <template>
     <section class="container login">
 
-        <h1>Login</h1>
+        <div>
+            <h1>Login</h1>
+        </div>
 
-        <form>
+        <div class="formulario">
+            <div>
+                <p class="login_incorreto" v-if="senhaIncorreta">E-mail ou senha incorretos!</p>
+                <p class="nao_encontrado" v-if="pedirParaCadastrar">E-mail não encontrado! Crie uma conta</p>
+            </div>
+            <form>
 
-            <label for="emailLogar">E-mail</label>
-            <input type="email" name="emailLogar" id="emailLogar" v-model="emailLogar" placeholder="E-mail" required>
+                <label for="emailLogar">E-mail</label>
+                <input type="email" name="emailLogar" id="emailLogar" v-model="emailLogar" placeholder="E-mail" required>
 
-            <label for="senha">Senha</label>
-            <input type="password" autocomplete="on" name="senha" id="senha" v-model="senha" placeholder="Senha" required>
+                <label for="senha">Senha</label>
+                <input type="password" autocomplete="on" name="senha" id="senha" v-model="senha" placeholder="Senha" required>
+                
+                <input type="submit" @click.prevent="fazerLogin(emailLogar, senha)" class="btn cadastrar" value="Entrar">
             
-            <p class="login_incorreto" v-if="senhaIncorreta">E-mail ou senha incorretos!</p>
-            <p class="pedirParaCadastrar" v-if="pedirParaCadastrar">E-mail não encontrado! Crie uma conta</p>
-            
-            <input type="submit" @click.prevent="fazerLogin(emailLogar, senha)" class="btn cadastrar" value="Entrar">
-        
-        </form>
+            </form>
+
+        </div>
 
         <LoginCriar/>
 
@@ -51,21 +57,29 @@ export default {
         fazerLogin(email, senha) {
             api.get(`usuario/?email=${email}`)
             .then(res => {
-                if (res.data.length == 0) {
+                var quantidadeDeUsuarioEncontrado = res.data.length
+
+                if (quantidadeDeUsuarioEncontrado == 0) {
+
                     this.pedirParaCadastrar = true
+                    this.senhaIncorreta = false
+
                 } else if(res.data[0].senha == senha) {
 
-                    this.dadosUsuario.nome = res.data[0].nome
-                    this.dadosUsuario.email = res.data[0].email
+                    const nomeDoUsuario  = res.data[0].nome
+                    const emailDoUsuario = res.data[0].email
 
-                    localStorage.setItem("email", res.data[0].email)
-                    localStorage.setItem("senha", res.data[0].senha)
+                    this.dadosUsuario.nome = nomeDoUsuario
+                    this.dadosUsuario.email = emailDoUsuario
 
                     this.$router.push('minhas-receitas')
-                    this.$store.dispatch("logarUsuario")
+                    this.$store.dispatch("logarUsuario", res.data[0])
+
                 } else {
+
                     this.senhaIncorreta = true
                     this.pedirParaCadastrar = null
+
                 }
             })
         }
@@ -88,12 +102,29 @@ export default {
     padding: 5px;
 }
 
-.login_incorreto {
-    background-color: red;
+.login_incorreto, .nao_encontrado {
+    width: 340px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
-.pedirParaCadastrar {
+.login_incorreto {
+    background-color: red;
+    color: #fff;
+}
+
+.nao_encontrado {
     background-color: yellow;
+}
+
+.formulario {
+    box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 form {

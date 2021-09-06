@@ -1,5 +1,5 @@
 <template>
-    <section class="cadastrar-receita">
+    <section class="container cadastrar-receita">
 
         <form class="adicionar-produto">
 
