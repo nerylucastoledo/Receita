@@ -103,7 +103,7 @@ export default {
 }
 
 .login_incorreto, .nao_encontrado {
-    width: 340px;
+    max-width: 100%;
     padding: 10px;
     border-radius: 10px;
     font-size: 18px;
