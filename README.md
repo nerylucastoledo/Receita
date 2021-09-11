@@ -38,7 +38,7 @@ Com o projeto na sua maquina, rode
 Depois de instaladas as dependências, rode
 
 ```sh
-  npm run serve
+  npm start
 ```
 
 Acesse
