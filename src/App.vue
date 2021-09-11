@@ -13,16 +13,19 @@ import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 
 export default {
+
   components: {
     Header,
     Footer,
   },
+
   created() {
     const logado = localStorage.getItem("email");
     if (logado) {
       this.$store.dispatch("pegarUsuario", logado);
     }
   },
+  
 };
 </script>
 
@@ -39,14 +42,11 @@ export default {
 }
 
 
-label,
-textarea {
+label, textarea {
   margin-bottom: 5px;
 }
 
-input,
-textarea,
-select {
+input, textarea, select {
   border-radius: 4px;
   border: 1px solid #fff;
   padding: 15px;
@@ -58,10 +58,7 @@ select {
   width: 100%;
 }
 
-input:hover,
-input:focus,
-textarea:focus,
-textarea:hover {
+input:hover, input:focus, textarea:focus, textarea:hover {
   outline: none;
   box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
   border-color: #6f9a37;
@@ -72,12 +69,7 @@ textarea:hover {
   font-family: apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
 }
 
-body,
-ul,
-li,
-h1,
-h2,
-p {
+body, ul, li, h1, h2, p {
   padding: 0px;
   margin: 0px;
 }
@@ -127,13 +119,13 @@ a {
   height: 250px;
   object-fit: cover;
   border-radius: 10px;
+  -webkit-filter:grayscale(0%)
 }
 
 .receitas img:hover{
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  transform: scale(1.1)
+  transform: scale(1.1);
+  -webkit-filter:grayscale(20%);
 }
 
 .receitas span {

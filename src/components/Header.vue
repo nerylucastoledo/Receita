@@ -5,7 +5,9 @@
 
             <div>
                 <router-link to="/">
-                    <img id="logo" src="../assets/logo.png" alt="Logo da empresa">
+                    <picture>
+                        <img id="logo" src="../assets/logo.png" alt="Logo da empresa">
+                    </picture>
                 </router-link>
             </div>
 
@@ -17,7 +19,9 @@
             </nav>
 
             <div class="entrar-header">
-                <img v-if="!$store.state.usuarioLogado" src="../assets/icon-pessoa.png" alt="">
+                <picture>
+                    <img v-if="!$store.state.usuarioLogado" src="../assets/icon-pessoa.png" alt="">
+                </picture>
                 <button v-if="$store.state.usuarioLogado" @click="deslogarUsuario" class="btn deslogar">Sair</button>
                 <router-link v-else to="/login"><button class="btn">Login</button></router-link>
             </div>
@@ -42,8 +46,10 @@ export default {
         deslogarUsuario() {
             this.$store.dispatch("deslogarUsuario")
             this.$router.push('login')
+
             this.$store.state.dadosUsuario.nome = ""
             this.$store.state.dadosUsuario.email = ""
+
             localStorage.clear()
         }
     }
@@ -80,7 +86,7 @@ export default {
     content: "";
     display: inline-block;
     width: 1px;
-    height: 20px;
+    height: 35px;
     background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     margin-left: 10px;
@@ -88,7 +94,7 @@ export default {
 
 #menu ul li a {
     color: #759F41;
-    font-size: 1rem;
+    font-size: 22px;
 }
 
 #menu ul li a:hover {
@@ -137,6 +143,13 @@ export default {
     .entrar-header {
         display: flex;
         justify-content: center;
+    }
+    #menu ul li a {
+        color: #759F41;
+        font-size: 1rem;
+    }
+    #menu ul li:first-child::after {
+        height: 25px;
     }
 }   
 

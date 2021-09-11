@@ -18,17 +18,17 @@
 
                 <h3>Redes Sociais</h3>
 
-                <div>
+                <picture>
                     <img src="../assets/facebook.png" alt="Logo Facebook">
                     <img src="../assets/instagram.png" alt="Logo Instragam">
                     <img src="../assets/twitter.png" alt="Logo Twitter">
-                </div>
+                </picture>
                 
             </div>
 
-            <div class="logo-footer">
+            <picture class="logo-footer">
                 <img src="../assets/logo.png" alt="">
-            </div>
+            </picture>
 
         </div>
 

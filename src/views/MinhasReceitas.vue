@@ -19,7 +19,10 @@
         
       </div>
 
+      <div v-else>
+        <p class="nada-encontrado" v-if="!this.$store.state.dadosUsuario.email">Faça login para ver suas receitas</p>
         <p class="nada-encontrado" v-else>Nenhum receita encontrada! :(</p>
+      </div>
 
     </div>
 

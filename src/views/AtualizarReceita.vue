@@ -92,7 +92,7 @@ export default {
   },
 
   methods: {
-    editarReceita() {
+    pegarReceita() {
       api.get(`receita/${this.id}`).then((res) => {
         this.receita = res.data;
       });
@@ -130,7 +130,7 @@ export default {
   },
 
   created() {
-    this.editarReceita();
+    this.pegarReceita();
   },
 };
 </script>

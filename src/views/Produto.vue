@@ -1,76 +1,85 @@
 <template>
+
     <section class="container produto">
-        
-        <div v-if="pessoa" class="pessoa">
-            <div v-if="pessoa.foto">
-                <img class="foto-pessoa" :src="pessoa.foto" alt="">
-            </div>
-            <div class="info-pessoa">
-                <p>Feito por <span>{{pessoa.nome}}</span></p>
-                <p>de <span>{{pessoa.cidade}}</span></p>
-            </div>
+
+        <div v-if="carregou == 0">
+            <PageLoading/>
         </div>
 
-        <div v-if="produto">
-
-            <div class="introducao-produto">
-                <img :src="produto.imagem" alt="">
-                <div>
-                    <h1>{{produto.nome_receita}}</h1>
-                    <p>{{produto.descricao}}</p>
+        <div v-else>
+            <div v-if="pessoa" class="pessoa">
+                <div v-if="pessoa.foto">
+                    <img class="foto-pessoa" :src="pessoa.foto" alt="">
+                </div>
+                <div class="info-pessoa">
+                    <p>Feito por <span>{{pessoa.nome}}</span></p>
+                    <p>de <span>{{pessoa.cidade}}</span></p>
                 </div>
             </div>
 
-            <div class="infos-produto">
-                
-                <div class="items">
-                    <font-awesome-icon icon="users"/>
-                    <h2>Pessoas</h2>
-                    <p>{{produto.serve}}</p>
+            <div v-if="produto">
+
+                <div class="introducao-produto">
+                    <div>
+                        <img :src="produto.imagem" alt="">
+                    </div>
+                    <div>
+                        <h1>{{produto.nome_receita}}</h1>
+                        <p>{{produto.descricao}}</p>
+                    </div>
                 </div>
-                <div class="items">
-                    <font-awesome-icon icon="clock"/>
-                    <h2>Tempo</h2>
-                    <p>{{produto.tempo}} min</p>
+
+                <div class="infos-produto">
+                    
+                    <div class="items">
+                        <font-awesome-icon icon="users"/>
+                        <h2>Pessoas</h2>
+                        <p>{{produto.serve}}</p>
+                    </div>
+                    <div class="items">
+                        <font-awesome-icon icon="clock"/>
+                        <h2>Tempo</h2>
+                        <p>{{produto.tempo}} min</p>
+                    </div>
+                    <div class="items">
+                        <font-awesome-icon icon="utensils"/>
+                        <h2>Categoria</h2>
+                        <p>{{produto.categoria}}</p>
+                    </div>
+                    <div class="items">
+                        <font-awesome-icon icon="tools"/>
+                        <h2>Dificuldade</h2>
+                        <p>{{produto.dificuldade}}</p>
+                    </div>
+
                 </div>
-                <div class="items">
-                    <font-awesome-icon icon="utensils"/>
-                    <h2>Categoria</h2>
-                    <p>{{produto.categoria}}</p>
+
+                <div class="ingredientes items">
+
+                    <h2>Ingredientes</h2>
+
+                    <div v-for="(ingredientes, index) in produto.ingredientes" :key="ingredientes+index">
+                        <input type="checkbox">
+                        <label for="">{{ingredientes}}</label>
+                    </div>
+
                 </div>
-                <div class="items">
-                    <font-awesome-icon icon="tools"/>
-                    <h2>Dificuldade</h2>
-                    <p>{{produto.dificuldade}}</p>
+
+                <div class="modo-preparo items">
+
+                    <h2>Modo de preparo</h2>
+
+                    <div v-for="(passo, index) in produto.modo_preparo" :key="passo+index">
+                        <p>{{index + 1}} - {{passo}}</p>
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="ingredientes items">
-
-                <h2>Ingredientes</h2>
-
-                <div v-for="(ingredientes, index) in produto.ingredientes" :key="ingredientes+index">
-                    <input type="checkbox">
-                    <label for="">{{ingredientes}}</label>
-                </div>
-
+            <div class="disqus">
+                <Disqus ref="disqus"/>
             </div>
-
-            <div class="modo-preparo items">
-
-                <h2>Modo de preparo</h2>
-
-                <div v-for="(passo, index) in produto.modo_preparo" :key="passo+index">
-                    <p>{{index + 1}} - {{passo}}</p>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="disqus">
-            <Disqus ref="disqus"/>
         </div>
 
     </section>
@@ -79,8 +88,14 @@
 <script>
 import { api } from '../service.js'
 
+import PageLoading from "../components/PageLoading.vue"
+
 export default {
     name: "Produto",
+
+    components: {
+        PageLoading,
+    },
 
     props: ["id"],
 
@@ -88,6 +103,7 @@ export default {
         return {
             produto: null,
             pessoa: null,
+            carregou: 0,
         }
     },
 
@@ -101,6 +117,9 @@ export default {
                 this.produto.ingredientes = ingredientes
                 this.produto.modo_preparo = modo_preparo
                 this.mostrarPessoaQueCriou(res.data.results[0].email_criador)
+                setTimeout(() => {
+                    this.carregou = 1
+                }, 1500);
             })
         },
 
@@ -124,6 +143,8 @@ export default {
 
 .produto {
     margin-top: 60px;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .pessoa {
@@ -156,6 +177,7 @@ export default {
     width: 600px;
     max-height: 400px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .introducao-produto p, .introducao-produto h1 {
@@ -177,8 +199,9 @@ export default {
 
 .items {
     background-color: #F3F5F6;
-    padding: 10px 30px;
+    padding: 20px 30px;
     margin: 10px 0px;
+    border-radius: 10px;
 }
 
 .items h2 {
@@ -188,7 +211,6 @@ export default {
 }
 
 .items p {
-    font-size: 1rem;
     color: #000;
     margin-top: 10px;
 }
@@ -196,8 +218,6 @@ export default {
 .ingredientes {
     margin-top: 40px;
     margin-bottom: 60px;
-    max-width: 100%;
-    text-align: center;
 }
 
 
@@ -206,13 +226,10 @@ export default {
 }
 
 .ingredientes > div {
-    display: inline-block;
-    margin: 20px 20px;
+    margin: 20px 0px;
     box-shadow: 0 4px 8px rgb(30 60 90 / 10%);
-    padding: 5px;
-    border-radius: 4px;
-    color: #000;
-    max-width: 50%;
+    padding: 10px;
+    font-size: 18px;
 }
 
 input {
@@ -223,10 +240,6 @@ input {
 
 ::marker {
     color: #759F41;
-}
-
-.medo-preparo {
-    text-align: initial;
 }
 
 .modo-preparo p {

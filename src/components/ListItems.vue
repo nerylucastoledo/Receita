@@ -1,49 +1,9 @@
 <template>
     <section class="container" id="pagina-inicial">
 
-        <div class="categoria">
-
+        <div>
             <h1 class="titulo">Navegue pelas categorias</h1>
-
-            <div>
-
-                <div class="categoria-items" @click="filtroCategoria('Pao')">
-                    <img src="../assets/paes.png" alt="">
-                    <p>Pães</p>
-                </div>
-
-                <div class="categoria-items" @click="filtroCategoria('Sobremesa')">
-                    <img src="../assets/sobremesa.png" alt="">
-                    <p>Sobremesa</p>
-                </div>
-            
-                <div class="categoria-items" @click="filtroCategoria('Salgados')">
-                    <img src="../assets/salgados.png" alt="">
-                    <p>Salgados</p>
-                </div>
-            
-                <div class="categoria-items" @click="filtroCategoria('Sopas')">
-                    <img src="../assets/sopas.png" alt="">
-                    <p>Sopas</p>
-                </div>
-
-                <div class="categoria-items" @click="filtroCategoria('Comida')">
-                    <img src="../assets/comida.png" alt="">
-                    <p>Comida</p>
-                </div>
-            
-                <div class="categoria-items" @click="filtroCategoria('Massas')">
-                    <img src="../assets/massa.png" alt="">
-                    <p>Massas</p>
-                </div>
-
-                <div class="categoria-items" @click="filtroCategoria('Aves')">
-                    <img src="../assets/aves.png" alt="">
-                    <p>Aves</p>
-                </div>
-                
-            </div>
-            
+            <Categorias/>
         </div>
 
         <div>
@@ -54,12 +14,15 @@
         <div v-if="carregou == 0">
             <PageLoading/>
         </div>
+
         <div v-else>
 
             <div class="receitas" v-if="receitas.length > 0">
                 <div v-for="(receita, index) in receitas" :key="receita + index">
                     <router-link :to="{name: 'produto', params: {id: receita.id_receita}}">
-                        <img :src="receita.imagem" alt="">
+                        <div>
+                            <img :src="receita.imagem" alt="">
+                        </div>
                         <span>{{receita.categoria}}</span>
                         <p>{{receita.nome_receita}}</p>
                     </router-link>
@@ -68,9 +31,11 @@
 
             <p class="nenhum-encontrada" v-else>Nenhum receita encontrada! :(</p>
             
-        </div>
+            <div>
+                <Paginar :quantidadeDeReceita="quantidadeDeReceita"></Paginar>
+            </div>
 
-        <Paginar :quantidadeDeReceita="quantidadeDeReceita"></Paginar>
+        </div>
 
     </section>
 </template>
@@ -82,6 +47,7 @@ import {serialize} from "../helpers.js"
 import ProdutoBuscar from "../components/ProdutoBuscar.vue"
 import Paginar from "../components/Paginar.vue"
 import PageLoading from "../components/PageLoading.vue"
+import Categorias from "../components/Categorias.vue"
 
 export default {
     name: "ListItems",
@@ -89,7 +55,8 @@ export default {
     components: {
         ProdutoBuscar,
         Paginar,
-        PageLoading
+        PageLoading,
+        Categorias
     },
 
     data() {
@@ -106,20 +73,12 @@ export default {
             api.get(this.url)
             .then(res => {
                 this.quantidadeDeReceita = res.data.count
-                this.receitas = res.data.results
+                this.receitas = res.data.results.reverse()
                 setTimeout(() => {
                     this.carregou = 1
                 }, 500);
             })
         },
-
-        filtroCategoria(recebido) {
-            this.$router.push({query: {categoria: recebido}})
-            api.get(this.url)
-            .then(res => {
-                this.receitas = res.data
-            })
-        }
     },
 
     computed: {
@@ -142,36 +101,6 @@ export default {
 </script>
 
 <style scoped>
-
-.categoria > div {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.categoria-items {
-    width: 95px;
-    height: 95px;
-    background-color: #FDAE89;
-    border-radius: 50%;
-    padding: 20px 0px;
-}
-
-.categoria-items img {
-    width: 40px;
-    display: block;
-    margin: 0 auto;
-}
-
-.categoria-items p {
-    text-align: center;
-    font-size: 14px;
-}
-
-.categoria-items:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-}
 
 .pesquisar {
     max-width: 300px;

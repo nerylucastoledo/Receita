@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { api } from '../service.js'
+
 
 Vue.use(Vuex)
 
@@ -45,10 +47,9 @@ export default new Vuex.Store({
     },
 
     pegarUsuario(context, payload) {
-      fetch(`https://rest-api-receita.herokuapp.com/usuario/?email=${payload}`)
-      .then(req => req.json())
+      api.get(`usuario/?email=${payload}`)
       .then(res => {
-        context.commit('INSERIRDADOS', res[0])
+        context.commit('INSERIRDADOS', res.data[0])
         context.commit('LOGARDESLOGARUSUARIO', true)
       })
     }
