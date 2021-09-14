@@ -17,7 +17,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(VueDisqus, {
   shortname: 'receitas-do-lucas',
-  //ktquez
 })
 
 new Vue({

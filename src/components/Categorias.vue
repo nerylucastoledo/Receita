@@ -1,5 +1,6 @@
 <template>
-    <div class="categoria">
+    <section class="categoria">
+
         <div class="categoria-items" @click="filtroCategoria('Pao')">
             <picture>
                 <img src="../assets/paes.png" alt="">
@@ -48,7 +49,8 @@
             </picture>
             <p>Aves</p>
         </div>
-    </div>
+
+    </section>
 </template>
 
 <script>
@@ -59,6 +61,7 @@ export default {
     methods: {
         filtroCategoria(recebido) {
             this.$router.push({query: {categoria: recebido}})
+            
             api.get(this.url)
             .then(res => {
                 setTimeout(() => {

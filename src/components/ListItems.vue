@@ -1,7 +1,7 @@
 <template>
     <section class="container" id="pagina-inicial">
 
-        <div>
+        <div class="categoria">
             <h1 class="titulo">Navegue pelas categorias</h1>
             <Categorias/>
         </div>
@@ -11,25 +11,47 @@
             <ProdutoBuscar/>
         </div>
         
-        <div v-if="carregou == 0">
+        <div v-if="!carregou">
             <PageLoading/>
         </div>
 
         <div v-else>
 
+            <div v-if="filtroPorCategoria || filtroPorPesquisa" class="sobremesa-selecionada">
+
+                <div>
+                    <span v-if="filtroPorCategoria">{{filtroPorCategoria}}</span>
+                    <span v-else>{{filtroPorPesquisa}}</span>
+                    
+                    <button @click="tirarFiltroDasReceita" class="fechar-sobremesa">X</button>
+                </div>
+
+            </div>
+
             <div class="receitas" v-if="receitas.length > 0">
+
                 <div v-for="(receita, index) in receitas" :key="receita + index">
+
                     <router-link :to="{name: 'produto', params: {id: receita.id_receita}}">
+
                         <div>
                             <img :src="receita.imagem" alt="">
                         </div>
-                        <span>{{receita.categoria}}</span>
-                        <p>{{receita.nome_receita}}</p>
+
+                        <div>
+                            <span>{{receita.categoria}}</span>
+                            <p>{{receita.nome_receita}}</p>
+                        </div>
+
                     </router-link>
+
                 </div>
+
             </div>
 
-            <p class="nenhum-encontrada" v-else>Nenhum receita encontrada! :(</p>
+            <div v-else>
+                <p class="nenhuma-encontrada">Nenhum receita encontrada! :(</p>
+            </div>
             
             <div>
                 <Paginar :quantidadeDeReceita="quantidadeDeReceita"></Paginar>
@@ -62,29 +84,41 @@ export default {
     data() {
         return {
             receitas: null,
-            carregou: 0,
-            quantidadeDeReceita: 1
+            carregou: null,
+            quantidadeDeReceita: 1,
         }
     },
 
     methods: {
         
-        async buscarReceitas() {
+        buscarReceitas() {
             api.get(this.url)
             .then(res => {
                 this.quantidadeDeReceita = res.data.count
                 this.receitas = res.data.results.reverse()
                 setTimeout(() => {
-                    this.carregou = 1
+                    this.carregou = true
                 }, 500);
             })
         },
+
+        tirarFiltroDasReceita() {
+            this.$router.push({query: {}})
+        }
     },
 
     computed: {
         url() {
             const query = serialize(this.$route.query)
             return `https://rest-api-receita.herokuapp.com/receita/${query}`
+        },
+
+        filtroPorCategoria() {
+            return this.$route.query.categoria
+        },
+
+        filtroPorPesquisa() {
+            return this.$route.query.nome_receita
         }
     },
 
@@ -123,26 +157,34 @@ export default {
     top: 45px;
 }
 
-.nenhum-encontrada {
+.nenhuma-encontrada {
     text-align: center;
+    clear: both;
 }
 
-@media (max-width: 759px) {
-  .categoria-items {
-    width: 60px;
-    height: 60px;
-    padding: 15px 0px;
-  }
+.sobremesa-selecionada {
+    position: relative;
+    color: #fff;
+    float: right;
+    top: -40px;
+    margin-right: 30px;
+}
 
-  .categoria-items img {
-    width: 30px;
-  }
+.sobremesa-selecionada span {
+    background-color: #ffa982;
+    padding: 6px;
+    border-radius: 10px;
+}
 
-  .categoria-items p {
-    margin-top: 15px;
+.fechar-sobremesa {
+    position: absolute;
+    top: -14px;
+    right: -6px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
     font-size: 12px;
-  }
+    background-color: rgb(243, 223, 223);
 }
-
 
 </style>

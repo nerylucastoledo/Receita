@@ -93,32 +93,34 @@ export default {
 
   methods: {
     pegarReceita() {
-      api.get(`receita/${this.id}`).then((res) => {
+      api.get(`receita/${this.id}`)
+      .then((res) => {
         this.receita = res.data;
       });
     },
 
     atualizarReceita() {
       const file = this.$refs.imagem.files[0];
-      const formatada = formatarReceita(this.receita, file)
+      const receitaFormatada = formatarReceita(this.receita, file)
 
-      api.put(`receita/${this.id}/`, formatada)
-        .then((res) => {
-          if (res.status === 200) {
-            this.modal = true;
-            setTimeout(() => {
-              this.modal == false;
-              this.$router.push("minhas-receitas");
-            }, 1000);
-          }
-        })
-        .catch((error) => {
-          if (error) {
-            alert(
-              "Não foi possível atualizar. Verifique se você adicionou a foto novamente."
-            );
-          }
-        });
+      api.put(`receita/${this.id}/`, receitaFormatada)
+      .then((res) => {
+        if (res.status === 200) {
+          this.modal = true;
+          
+          setTimeout(() => {
+            this.modal == false;
+            this.$router.push("minhas-receitas");
+          }, 1000);
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          alert(
+            "Não foi possível atualizar. Verifique se você adicionou a foto novamente."
+          );
+        }
+      });
     },
 
     async deletarReceita() {
@@ -131,6 +133,7 @@ export default {
 
   created() {
     this.pegarReceita();
+    document.title = 'Atualizar Receita'
   },
 };
 </script>

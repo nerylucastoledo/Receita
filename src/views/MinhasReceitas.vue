@@ -3,18 +3,21 @@
 
     <h1 class="titulo">Suas Receitas</h1>
 
-    <div v-if="carregou == 0">
+    <div v-if="!carregou">
       <PageLoading/>
     </div>
 
     <div v-else>
+
       <div class="receitas" v-if="minhasReceitas.length > 0">
 
         <div v-for="(receita, index) in minhasReceitas" :key="receita + index">
+
           <router-link :to="{name: 'atualizar-receita', params: { id: receita.id_receita }}">
             <img :src="receita.imagem" alt="" />
             <p>{{ receita.nome_receita }}</p>
           </router-link>
+
         </div>
         
       </div>
@@ -27,9 +30,13 @@
     </div>
 
 
-    <Paginar :quantidadeDeReceita="quantidadeDeReceita"></Paginar>
+    <div>
+      <Paginar :quantidadeDeReceita="quantidadeDeReceita"></Paginar>
+    </div>
     
-    <router-link v-if="this.$store.state.dadosUsuario.email" to="/cadastrar-receita" class="btn cadastrar">Cadastrar Receita</router-link>
+    <div>
+      <router-link v-if="this.$store.state.dadosUsuario.email" to="/cadastrar-receita" class="btn cadastrar">Cadastrar Receita</router-link>
+    </div>
   
   </section>
 </template>
@@ -52,29 +59,27 @@ export default {
   data() {
     return {
       minhasReceitas: "",
-      carregou: 0,
+      carregou: false,
       quantidadeDeReceita: 1,
+      emailDoUsuario: this.$store.state.dadosUsuario.email
     };
   },
 
   methods: {
     pegarMinhasReceitas() {
-      if (this.$store.state.dadosUsuario.email) {
+      if (this.emailDoUsuario) {
         api.get(this.url)
           .then((res) => {
-
             this.quantidadeDeReceita = res.data.count
             this.minhasReceitas = res.data.results;
 
             setTimeout(() => {
-              this.carregou = 1
+              this.carregou = true
             }, 500);
 
           });
       } else {
-        setTimeout(() => {
-          this.carregou = 1
-        }, 500);
+          this.carregou = true
       }
     },
   },
@@ -85,22 +90,18 @@ export default {
       const formatQuery = query.replace('?', '&')
 
       if(this.$route.query.page > 0) {
-        return `receita/?email_criador=${this.$store.state.dadosUsuario.email}&page=${formatQuery}`
+        return `receita/?email_criador=${this.emailDoUsuario}&page=${formatQuery}`
       } else {
-        return `receita/?email_criador=${this.$store.state.dadosUsuario.email}`
+        return `receita/?email_criador=${this.emailDoUsuario}`
       }
     }
   },
 
-    watch: {
-      url() {
-        this.pegarMinhasReceitas()
-      }
-    },
-
   created() {
     this.pegarMinhasReceitas();
+    document.title = 'Minhas Receita'
   },
+
 };
 </script>
 

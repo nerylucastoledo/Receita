@@ -16,6 +16,10 @@ export default {
   components: {
     ListItems
   },
+
+  created() {
+    document.title = 'Receitas'
+  }
 }
 </script>
 

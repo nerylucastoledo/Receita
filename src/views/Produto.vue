@@ -2,27 +2,32 @@
 
     <section class="container produto">
 
-        <div v-if="carregou == 0">
+        <div v-if="!carregou">
             <PageLoading/>
         </div>
 
         <div v-else>
+
             <div v-if="pessoa" class="pessoa">
+
                 <div v-if="pessoa.foto">
-                    <img class="foto-pessoa" :src="pessoa.foto" alt="">
+                    <img class="foto-pessoa" :src="pessoa.foto" alt="Foto de Perfil">
                 </div>
+
                 <div class="info-pessoa">
                     <p>Feito por <span>{{pessoa.nome}}</span></p>
                     <p>de <span>{{pessoa.cidade}}</span></p>
                 </div>
+
             </div>
 
             <div v-if="produto">
 
                 <div class="introducao-produto">
                     <div>
-                        <img :src="produto.imagem" alt="">
+                        <img :src="produto.imagem" alt="Imagem do produto">
                     </div>
+
                     <div>
                         <h1>{{produto.nome_receita}}</h1>
                         <p>{{produto.descricao}}</p>
@@ -36,16 +41,19 @@
                         <h2>Pessoas</h2>
                         <p>{{produto.serve}}</p>
                     </div>
+
                     <div class="items">
                         <font-awesome-icon icon="clock"/>
                         <h2>Tempo</h2>
                         <p>{{produto.tempo}} min</p>
                     </div>
+
                     <div class="items">
                         <font-awesome-icon icon="utensils"/>
                         <h2>Categoria</h2>
                         <p>{{produto.categoria}}</p>
                     </div>
+
                     <div class="items">
                         <font-awesome-icon icon="tools"/>
                         <h2>Dificuldade</h2>
@@ -103,7 +111,7 @@ export default {
         return {
             produto: null,
             pessoa: null,
-            carregou: 0,
+            carregou: false,
         }
     },
 
@@ -111,15 +119,20 @@ export default {
         mostrarProdutoSelecionado() {
             api.get(`receita/?id=${this.id}`)
             .then(res => {
-                const ingredientes = res.data.results[0].ingredientes.split(",")
-                const modo_preparo = res.data.results[0].modo_preparo.split(";")
+                const ingredientesFormatado = res.data.results[0].ingredientes.split(",")
+                const modoPreparoFormatado = res.data.results[0].modo_preparo.split(";")
+                const emailDoCriador = res.data.results[0].email_criador
+
                 this.produto = res.data.results[0]
-                this.produto.ingredientes = ingredientes
-                this.produto.modo_preparo = modo_preparo
-                this.mostrarPessoaQueCriou(res.data.results[0].email_criador)
+                this.produto.ingredientes = ingredientesFormatado
+                this.produto.modo_preparo = modoPreparoFormatado
+                
+                this.mostrarPessoaQueCriou(emailDoCriador)
                 setTimeout(() => {
-                    this.carregou = 1
-                }, 1500);
+                    this.carregou = true
+                }, 1000);
+
+                document.title = `Receita - ${res.data.results[0].nome_receita}`
             })
         },
 

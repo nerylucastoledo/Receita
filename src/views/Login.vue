@@ -24,7 +24,9 @@
 
         </div>
 
-        <LoginCriar/>
+        <div>
+            <LoginCriar/>
+        </div>
 
     </section>
 </template>
@@ -83,6 +85,10 @@ export default {
                 }
             })
         }
+    },
+
+    created() {
+        document.title = 'Login'
     }
 }
 </script>

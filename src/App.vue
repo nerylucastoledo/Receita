@@ -108,6 +108,7 @@ a {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
   margin: 30px;
+  clear: both;
 }
 
 .receitas div {
@@ -162,9 +163,9 @@ a {
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 720px) {
   .categoria {
-    display: none;
+    display: none !important;
   }
 
   .titulo {
@@ -191,11 +192,15 @@ a {
 @media (max-width: 490px) {
   .receitas {
     display: block;
-    margin: 30px 0 0;
+    margin: 30px 0 40px 0;
   }
 
-  .receitas div {
+  .receitas > div {
     margin-bottom: 60px;
+  }
+
+  .receitas img:hover{
+    transform: scale(1.0);
   }
 }
 </style>

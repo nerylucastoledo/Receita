@@ -127,7 +127,7 @@ export default {
     color: #FC834B;
 }
 
-@media (max-width: 620px) {
+@media (max-width: 690px) {
     #menu {
         display: block;
     }
@@ -149,7 +149,10 @@ export default {
         font-size: 1rem;
     }
     #menu ul li:first-child::after {
-        height: 25px;
+        display: none;
+    }
+    .entrar-header picture {
+        display: none;
     }
 }   
 

@@ -1,10 +1,10 @@
 <template>
-    <div class="c-loader"></div>
+    <div class="carregar"></div>
 </template>
 
 <style>
 
-.c-loader {
+.carregar {
   animation: is-rotating 1s infinite;
   border: 6px solid #e5e5e5;
   border-radius: 50%;

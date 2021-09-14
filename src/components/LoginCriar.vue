@@ -1,7 +1,9 @@
 <template>
     <section>
 
-        <h1 class="titulo">Crie sua conta</h1>
+        <div>
+            <h1 class="titulo">Crie sua conta</h1>
+        </div>
 
         <div>
             <button v-if="!mostrar" @click="mostrar = true" class="btn cadastrar">Criar conta</button>
@@ -71,31 +73,32 @@ export default {
 
     methods: {
         cadastrarUsuario() {
-        const form = new FormData();
-        const file = this.$refs.foto.files[0];
+            const form = new FormData();
+            const file = this.$refs.foto.files[0];
 
-        form.append("nome", this.usuario.nome);
-        form.append("email", this.usuario.email);
-        form.append("senha", this.usuario.senha);
-        form.append("sobrenome", this.usuario.sobrenome);
-        form.append("estado", this.usuario.estado);
-        form.append("cidade", this.usuario.cidade);
-        form.append("foto", file);
+            form.append("nome", this.usuario.nome);
+            form.append("email", this.usuario.email);
+            form.append("senha", this.usuario.senha);
+            form.append("sobrenome", this.usuario.sobrenome);
+            form.append("estado", this.usuario.estado);
+            form.append("cidade", this.usuario.cidade);
+            form.append("foto", file);
 
-        api.post("usuario/", form)
+            api.post("usuario/", form)
             .then((res) => {
-            if (res.status == 201) {
-                this.modal = true;
-                setTimeout(() => {
-                    this.modal = false;
-                    this.mostrar = false
-                }, 1000);
-            }
+                if (res.status == 201) {
+                    this.modal = true;
+                    
+                    setTimeout(() => {
+                        this.modal = false;
+                        this.mostrar = false
+                    }, 1000);
+                }
             })
             .catch((error) => {
-            if (error) {
-                alert("Não foi possivel se cadastrar. Tente novamente");
-            }
+                if (error) {
+                    alert("Não foi possivel se cadastrar. Tente novamente");
+                }
             });
         },
     },

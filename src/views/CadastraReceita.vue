@@ -86,9 +86,9 @@ export default {
     methods: {
         cadastrarReceita() {
             const file = this.$refs.imagem.files[0];
-            const formatada = formatarReceita(this.receita, file)
+            const receitaFormatada = formatarReceita(this.receita, file)
 
-            api.post('receita/', formatada)
+            api.post('receita/', receitaFormatada)
             .then(res => {
                 if (res.status === 201) {
                     this.modal = true;
@@ -103,6 +103,10 @@ export default {
                 }
             })
         }
+    },
+
+    created() {
+        document.title = 'Cadastrar Receita'
     }
 }
 </script>
