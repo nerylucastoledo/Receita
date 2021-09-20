@@ -1,4 +1,4 @@
-# Website de Receitas :stew:
+# Site de Receitas :stew:
 
 
 ## Um website aonde você pode conferir as melhores receitas cadastradas pelas pessoas.
