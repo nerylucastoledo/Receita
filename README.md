@@ -17,7 +17,7 @@
 - Navegação por página.
 - Fazer comentario em uma receita com o disqus.
 
-> Status do Projeto: Em processo de finalização :warning:
+> Status do Projeto: Finalizado!
 
 ## Deploy da Aplicação com Heroku / Aws: :dash:
 > http://receitas-lucas.herokuapp.com/
