@@ -20,7 +20,7 @@
 > Status do Projeto: Finalizado! :heavy_check_mark:
 
 ## Projeto integrado com Api Rest
-Api foi criada por mim utilizando django rest, está no servidor do heroku e utilizando o aws para salvar imagens.
+Criei a API utilizando Django Rest, esta no servidor do heroku e as imagens estão sendo salvas na aws.
 
 ## Deploy da Aplicação com Heroku / Aws: :dash:
 > http://receitas-lucas.herokuapp.com/
