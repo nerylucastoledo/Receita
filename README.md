@@ -23,7 +23,7 @@
 > http://receitas-lucas.herokuapp.com/
 
 ## Como rodar a aplicação na sua máquina :rocket:
-No terminal clone o projeto
+No terminal clone o projeto:
 
 ```sh
   git clone https://github.com/nerylucastoledo/Receita.git
